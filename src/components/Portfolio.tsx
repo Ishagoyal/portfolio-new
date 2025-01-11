@@ -1,6 +1,8 @@
+import ContactForm from "./ContactForm";
 import Header from "./Header";
 import Hero from "./Hero";
 import Projects from "./Projects";
+import WorkExperiences from "./WorkExperiences";
 
 const Portfolio = () => {
   return (
@@ -8,6 +10,8 @@ const Portfolio = () => {
       <Header />
       <Hero />
       <Projects />
+      <WorkExperiences />
+      <ContactForm />
     </div>
   );
 };
