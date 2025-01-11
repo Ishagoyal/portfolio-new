@@ -23,9 +23,15 @@ const WorkExperienceCard = ({
         </span>
       ))}
     </div>
-    <p className="text-sm text-gray-500 dark:text-gray-400">
-      {workExperience.role}
-    </p>
+    <div className="flex justify-between">
+      <p className="text-sm text-gray-500 dark:text-gray-400">
+        {workExperience.role}
+      </p>
+      <p className="text-sm text-gray-500 dark:text-gray-400">
+        {workExperience.duration}
+      </p>
+    </div>
+
     <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
       <MoveUpRight className="w-5 h-5 text-blue-600 dark:text-blue-400" />
     </div>

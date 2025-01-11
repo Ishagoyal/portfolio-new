@@ -3,6 +3,7 @@ export type Project = {
   description: string;
   tech: string[];
   role: string;
+  link: string;
 };
 
 export type WorkExperience = {
@@ -10,6 +11,8 @@ export type WorkExperience = {
   description: string;
   tech: string[];
   role: string;
+  link: string;
+  duration: string;
 };
 
 export type FormData = {

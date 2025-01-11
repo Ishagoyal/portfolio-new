@@ -6,22 +6,25 @@ const projects: Project[] = [
     title: "Cards Game",
     description:
       "The project is a React frontend application that displays a list of documents in the form of cards. These cards can be reordered, and each card can display an overlay image when clicked.",
-    tech: ["React", "TypeScript", "Mock Service Worker"],
-    role: "Frontend Developer",
+    tech: ["React", "TypeScript", "Mock Service Worker", "Tailwind"],
+    role: "Senior Frontend Developer",
+    link: "https://zania-task-iota.vercel.app/",
   },
   {
-    title: "Analytics Dashboard",
+    title: "Custom Date Range Picker",
     description:
-      "Real-time analytics dashboard with complex data visualizations",
-    tech: ["React", "D3.js", "WebSocket", "TypeScript"],
+      "A date range picker component in React and TypeScript that allows users to select weekdays (Monday through Friday) and prevents them from selecting weekends (Saturday and Sunday).",
+    tech: ["React", "TypeScript", "Tailwind"],
     role: "Senior Frontend Engineer",
+    link: "https://date-range-picker-tau.vercel.app/",
   },
   {
-    title: "Design System",
+    title: "Weather Dashboard",
     description:
-      "Created a comprehensive design system used across multiple products",
-    tech: ["React", "Storybook", "Jest", "Tailwind"],
-    role: "Frontend Architect",
+      "a weather dashboard using SvelteKit, TypeScript, and Tailwind CSS. The dashboard should allow users to view current weather conditions and a five-day forecast for a selected location.",
+    tech: ["SvelteKit", "TypeScript", "Tailwind"],
+    role: "Senior Frontend Engineer",
+    link: "https://isha-weather-dashboard.netlify.app/",
   },
 ];
 
