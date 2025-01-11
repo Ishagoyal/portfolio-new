@@ -3,11 +3,11 @@ import ProjectCard from "./ProjectCard";
 
 const projects: Project[] = [
   {
-    title: "E-commerce Platform",
+    title: "Cards Game",
     description:
-      "Built a full-featured e-commerce platform with React, Redux, and GraphQL",
-    tech: ["React", "TypeScript", "GraphQL", "Redux"],
-    role: "Lead Frontend Developer",
+      "The project is a React frontend application that displays a list of documents in the form of cards. These cards can be reordered, and each card can display an overlay image when clicked.",
+    tech: ["React", "TypeScript", "Mock Service Worker"],
+    role: "Frontend Developer",
   },
   {
     title: "Analytics Dashboard",

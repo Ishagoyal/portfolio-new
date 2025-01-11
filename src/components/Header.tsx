@@ -3,9 +3,7 @@ import { Moon, Sun } from "lucide-react";
 
 const Header = () => {
   const [isScrolling, setIsScrolling] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Handle scroll
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolling(window.scrollY > 50);
@@ -15,14 +13,33 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Handle dark mode
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== "undefined") {
+      // Check system preference
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      return localStorage.getItem("theme") || (prefersDark ? "dark" : "light");
+    }
+    return "light";
+  });
+
+  const toggleTheme = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+  };
+
   useEffect(() => {
-    if (isDarkMode) {
+    // Apply the theme to the root element
+    if (theme === "dark") {
       document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
     } else {
+      document.documentElement.classList.add("light");
       document.documentElement.classList.remove("dark");
     }
-  }, [isDarkMode]);
+  }, [theme]);
 
   return (
     <nav
@@ -39,10 +56,11 @@ const Header = () => {
           </span>
           <div className="hidden md:flex items-center space-x-8">
             <button
-              onClick={() => setIsDarkMode(!isDarkMode)}
+              onClick={toggleTheme}
               className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              aria-label="Toggle dark mode"
             >
-              {isDarkMode ? (
+              {theme === "dark" ? (
                 <Sun className="w-5 h-5 text-gray-300" />
               ) : (
                 <Moon className="w-5 h-5 text-gray-600" />
