@@ -6,7 +6,13 @@ const WorkExperienceCard = ({
 }: {
   workExperience: WorkExperience;
 }) => (
-  <div className="group relative bg-gray-50 dark:bg-gray-700 rounded-xl p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+  <a
+    href={workExperience.link} // Navigate to the project link
+    target="_blank" // Open in a new tab
+    rel="noopener noreferrer" // Security best practice
+    className="group relative block bg-gray-50 dark:bg-gray-700 rounded-xl p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+  >
+    {" "}
     <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
       {workExperience.title}
     </h3>
@@ -31,11 +37,10 @@ const WorkExperienceCard = ({
         {workExperience.duration}
       </p>
     </div>
-
     <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
       <MoveUpRight className="w-5 h-5 text-blue-600 dark:text-blue-400" />
     </div>
-  </div>
+  </a>
 );
 
 export default WorkExperienceCard;
