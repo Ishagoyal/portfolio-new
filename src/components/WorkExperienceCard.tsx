@@ -10,7 +10,7 @@ const WorkExperienceCard = ({
     href={workExperience.link} // Navigate to the project link
     target="_blank" // Open in a new tab
     rel="noopener noreferrer" // Security best practice
-    className="group relative block bg-gray-50 dark:bg-gray-700 rounded-xl p-6 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2"
+    className="group relative block bg-gray-50 dark:bg-gray-700 rounded-xl p-6 hover:shadow-2xl hover:scale-105 transform transition-all duration-300"
   >
     {" "}
     <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">

@@ -15,7 +15,15 @@ const workExperiences: WorkExperience[] = [
     title: "Playment (Telus International AI Data Solutions)",
     description:
       "Creating and enhancing the world's data to enable better AI via human intelligence.",
-    tech: ["React", "Konva.js", "Redux", "TypeScript", "AntD", "Storybook", "Three.js"],
+    tech: [
+      "React",
+      "Konva.js",
+      "Redux",
+      "TypeScript",
+      "AntD",
+      "Storybook",
+      "Three.js",
+    ],
     role: "Senior Frontend Engineer",
     link: "https://jarvis.playment.io/",
     duration: "Dec 2019 - Feb 2023",
@@ -24,7 +32,7 @@ const workExperiences: WorkExperience[] = [
     title: "ClearGlass Analytics",
     description:
       "A digital platform for asset owners to see all their investment costs in one place.",
-    tech: ["Vue", "Cypress", "VueX", ],
+    tech: ["Vue", "Cypress", "VueX"],
     role: "Frontend Developer",
     link: "https://portal.clearglass.com/auth/login",
     duration: "March 2019- Nov 2019",
@@ -33,7 +41,7 @@ const workExperiences: WorkExperience[] = [
 const WorkExperiences = () => {
   return (
     <>
-      <section className="py-20 bg-white dark:bg-gray-800">
+      <section id="work-experience" className="py-20 bg-white dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-12">
             Work Experience

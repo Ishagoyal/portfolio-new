@@ -31,7 +31,7 @@ const projects: Project[] = [
 const Projects = () => {
   return (
     <>
-      <section className="py-20 bg-white dark:bg-gray-800">
+      <section id="projects" className="py-20 bg-white dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-12">
             Projects

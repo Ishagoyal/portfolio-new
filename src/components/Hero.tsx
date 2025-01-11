@@ -10,19 +10,17 @@ const Hero = () => {
 
   const openGitHub = () => {
     window.open(
-      "https://github.com/your-github-profile",
+      "https://github.com/Ishagoyal",
       "_blank",
       "noopener,noreferrer"
     );
   };
 
   return (
-    <section className="pt-32 pb-20 px-4">
-      <div className="max-w-7xl mx-auto text-center">
-        <h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-6">
-          Senior Frontend Developer
-        </h1>
-        <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
+    <section className="pt-32 pb-20 px-4 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600">
+      <div className="max-w-7xl mx-auto text-center text-white">
+        <h1 className="text-5xl font-bold mb-6">Senior Frontend Developer</h1>
+        <p className="text-xl mb-8">
           Building exceptional digital experiences with modern web technologies
         </p>
         <div className="flex justify-center space-x-4">
