@@ -1,20 +1,15 @@
 {
-    "projects": [
+    "version": 2,
+    "builds": [
         {
-            "name": "portfolio-backend",
-            "path": "portfolio-backend",
-            "builds": [
-                {
-                    "src": "server.js",
-                    "use": "@vercel/node"
-                }
-            ],
-            "routes": [
-                {
-                    "src": "/(.*)",
-                    "dest": "server.js"
-                }
-            ]
+            "src": "portfolio-backend/server.js",
+            "use": "@vercel/node"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "portfolio-backend/server.js"
         }
     ]
 }
