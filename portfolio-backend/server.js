@@ -1,37 +1,61 @@
 const express = require("express");
-const nodemailer = require("nodemailer");
 const cors = require("cors");
+const nodemailer = require("nodemailer");
+const AWS = require("aws-sdk");
+require("dotenv").config();
 
 const app = express();
-app.use(cors());
+
+// Enable CORS
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
+
+// Parse JSON request body
 app.use(express.json());
 
+// Configure AWS SDK with your SES credentials
+AWS.config.update({
+  region: "ap-south-1",
+  accessKeyId: process.env.ACCESS_KEY_ID,
+  secretAccessKey: process.env.SECRET_ACCESS_KEY,
+});
+
+// Create a transporter using AWS SES
+const transporter = nodemailer.createTransport({
+  SES: new AWS.SES({ apiVersion: "2010-12-01" }),
+});
+
+// Send email POST request handler
 app.post("/send-email", async (req, res) => {
   const { name, email, message } = req.body;
 
-  // Configure Nodemailer transporter
-  const transporter = nodemailer.createTransport({
-    service: "Gmail",
-    auth: {
-      user: "your-email@gmail.com", // Replace with your email
-      pass: "your-email-password", // Replace with your email password or app password
-    },
-  });
-  const mailOptions = {
-    from: email,
-    to: "your-email@gmail.com", // Replace with your email
-    subject: `Contact Form Submission from ${name}`,
-    text: message,
-  };
   try {
-    await transporter.sendMail(mailOptions);
-    res.status(200).json({ message: "Email sent successfully!" });
+    // Define the email details
+    const mailOptions = {
+      from: "withcoolisha93@gmail.com", // Verified sender email
+      to: "iamishagoyal@gmail.com", // Verified recipient email
+      subject: `New Message from ${name}`,
+      text: `You have a new message:\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}`,
+    };
+
+    // Send the email
+    const info = await transporter.sendMail(mailOptions);
+
+    // Log the result of sending the email
+    console.log("Email sent successfully:", info);
+
+    // Send response back to the client
+    res.status(200).send("Email sent successfully!");
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Failed to send email" });
+    res
+      .status(500)
+      .json({ message: "Failed to send email.", error: error.message });
   }
 });
 
-app.listen(5000, () => {
-  console.log("Server is running on port 5000");
-});
+// Start the server
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
