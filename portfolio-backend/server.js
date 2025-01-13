@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
 
 const allowedOrigins = [
   "http://localhost:5173", // Local development
-  "https://portfolio-new-self-ten.vercel.app/", // Deployed frontend
+  "https://portfolio-new-self-ten.vercel.app", // Deployed frontend
 ];
 
 app.use(
