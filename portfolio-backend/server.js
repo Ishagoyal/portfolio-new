@@ -14,9 +14,24 @@ app.get("/", (req, res) => {
 });
 
 // Enable CORS
+
+const allowedOrigins = [
+  "http://localhost:5173", // Local development
+  "https://portfolio-new-self-ten.vercel.app/", // Deployed frontend
+];
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: (origin, callback) => {
+      // Allow requests with no origin (e.g., mobile apps or server-to-server requests)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true); // Origin is allowed
+      } else {
+        callback(new Error("Not allowed by CORS")); // Origin is not allowed
+      }
+    },
   })
 );
 
