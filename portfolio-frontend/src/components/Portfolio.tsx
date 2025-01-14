@@ -2,6 +2,7 @@ import ContactForm from "./ContactForm";
 import Header from "./Header";
 import Hero from "./Hero";
 import Projects from "./Projects";
+import Resume from "./Resume";
 import WorkExperiences from "./WorkExperiences";
 
 const Portfolio = () => {
@@ -12,6 +13,7 @@ const Portfolio = () => {
       <Projects />
       <WorkExperiences />
       <ContactForm />
+      <Resume />
     </div>
   );
 };
