@@ -1,4 +1,4 @@
-import { Github, Mail, Linkedin } from "lucide-react";
+import { Github, Linkedin, Mail } from "lucide-react";
 
 const Hero = () => {
   const scrollToContact = () => {
@@ -25,52 +25,46 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative pt-32 pb-24 px-6 bg-gradient-to-br from-gradientStart via-gradientMid to-gradientEnd text-white overflow-hidden">
+    <section className="relative pt-32 pb-24 px-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white overflow-hidden">
       {/* Decorative Circles */}
-      <div className="absolute top-[-50px] left-[-50px] w-72 h-72 bg-blue-500/30 rounded-full blur-[120px]"></div>
-      <div className="absolute bottom-[-50px] right-[-50px] w-72 h-72 bg-purple-600/30 rounded-full blur-[120px]"></div>
+      <div className="absolute top-[-150px] left-[-150px] w-72 h-72 bg-blue-500/30 rounded-full blur-[120px]"></div>
+      <div className="absolute bottom-[-150px] right-[-150px] w-72 h-72 bg-purple-600/30 rounded-full blur-[120px]"></div>
 
       <div className="max-w-7xl mx-auto relative z-10 text-center">
-        {/* Name and Title */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold leading-tight tracking-tighter mb-4">
+        <h1 className="text-5xl font-extrabold leading-tight tracking-tighter mb-4">
           Hi, I’m <span className="text-blue-300">Isha Goyal</span>
         </h1>
-        <h2 className="mt-2 text-xl sm:text-2xl md:text-3xl font-medium leading-relaxed text-gray-200">
-          Crafting exceptional web experiences.
+        <h2 className="mt-2 text-2xl font-semibold text-gray-200">
+          Crafting Exceptional Web Experiences
         </h2>
-        <p className="mt-4 text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">
+        <p className="mt-4 text-lg text-gray-300 max-w-2xl mx-auto">
           I build high-performance, user-focused websites and applications using
-          modern technologies like React, TypeScript, and TailwindCSS. Let's
-          create something amazing together!
+          modern technologies. Let's build something amazing together!
         </p>
 
-        {/* Call-to-Action Buttons */}
-        <div className="mt-8 flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
-          {/* Contact Me Button */}
+        <div className="mt-8 flex justify-center items-center space-x-6">
           <button
             onClick={scrollToContact}
-            className="px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg transition-all transform hover:scale-105 flex items-center space-x-2"
+            className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transform hover:scale-105 transition-all shadow-xl"
           >
-            <Mail className="w-5 h-5" />
-            <span className="font-medium">Contact Me</span>
+            <Mail className="inline-block w-5 h-5 mr-2" />
+            Contact Me
           </button>
 
-          {/* GitHub Button */}
           <button
             onClick={openGitHub}
-            className="px-6 py-3 rounded-full border border-gray-300 hover:border-blue-500 hover:text-blue-500 dark:border-gray-700 dark:hover:border-blue-400 dark:hover:text-blue-400 transition-all flex items-center space-x-2"
+            className="px-8 py-3 border-2 border-gray-300 hover:border-blue-500 text-white rounded-lg transition-all transform hover:scale-105"
           >
-            <Github className="w-5 h-5" />
-            <span className="font-medium">GitHub</span>
+            <Github className="inline-block w-5 h-5 mr-2" />
+            GitHub
           </button>
 
-          {/* LinkedIn Button */}
           <button
             onClick={openLinkedIn}
-            className="px-6 py-3 rounded-full bg-blue-500 hover:bg-blue-600 text-white shadow-lg transition-all transform hover:scale-105 flex items-center space-x-2"
+            className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transform hover:scale-105 transition-all shadow-xl"
           >
-            <Linkedin className="w-5 h-5" />
-            <span className="font-medium">LinkedIn</span>
+            <Linkedin className="inline-block w-5 h-5 mr-2" />
+            LinkedIn
           </button>
         </div>
       </div>

@@ -44,16 +44,16 @@ const ContactForm = () => {
 
   return (
     <section className="py-20 bg-white dark:bg-gray-800" id="contact-form">
-      <div className="max-w-3xl mx-auto px-4">
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-12">
+      <div className="max-w-3xl mx-auto px-6">
+        <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-12">
           Contact
         </h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <input
               type="text"
-              placeholder="Name"
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700"
+              placeholder="Your Name"
+              className="w-full px-6 py-3 rounded-lg border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
               value={formData.name}
               onChange={(e) =>
                 setFormData({ ...formData, name: e.target.value })
@@ -64,8 +64,8 @@ const ContactForm = () => {
           <div>
             <input
               type="email"
-              placeholder="Email"
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700"
+              placeholder="Your Email"
+              className="w-full px-6 py-3 rounded-lg border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
               value={formData.email}
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
@@ -75,8 +75,8 @@ const ContactForm = () => {
           </div>
           <div>
             <textarea
-              placeholder="Message"
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700"
+              placeholder="Your Message"
+              className="w-full px-6 py-3 rounded-lg border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
               value={formData.message}
               onChange={(e) =>
                 setFormData({ ...formData, message: e.target.value })

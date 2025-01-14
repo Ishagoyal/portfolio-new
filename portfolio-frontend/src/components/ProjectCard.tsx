@@ -3,9 +3,9 @@ import { MoveUpRight } from "lucide-react";
 
 const ProjectCard = ({ project }: { project: Project }) => (
   <a
-    href={project.link} // Navigate to the project link
-    target="_blank" // Open in a new tab
-    rel="noopener noreferrer" // Security best practice
+    href={project.link}
+    target="_blank"
+    rel="noopener noreferrer"
     className="group relative block bg-gray-50 dark:bg-gray-700 rounded-xl p-6 hover:shadow-2xl hover:scale-105 transform transition-all duration-300"
   >
     <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
