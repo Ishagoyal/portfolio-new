@@ -13,7 +13,7 @@ const Resume = () => {
 
         <div className="flex justify-center space-x-8">
           <a
-            href="public/Isha Resume.pdf" // Replace with actual file path
+            href="/Isha Resume.pdf" // Replace with actual file path
             target="_blank"
             download
             className="px-8 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all"
@@ -22,7 +22,7 @@ const Resume = () => {
           </a>
 
           <a
-            href="public/Isha Resume.pdf" // Replace with actual file path
+            href="/Isha Resume.pdf" // Replace with actual file path
             target="_blank"
             className="px-8 py-3 border-2 border-blue-600 text-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition-all"
           >
