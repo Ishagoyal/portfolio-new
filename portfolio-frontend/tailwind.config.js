@@ -5,7 +5,25 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
+        sans: ["Roboto", "sans-serif"], // Roboto for a cleaner, smaller font style
+      },
+      animation: {
+        gradientShift: "gradientShift 10s ease infinite",
+      },
+      backgroundSize: {
+        "400%": "400% 400%",
+      },
+      keyframes: {
+        gradientShift: {
+          "0%": { "background-position": "0% 50%" },
+          "50%": { "background-position": "100% 50%" },
+          "100%": { "background-position": "0% 50%" },
+        },
+      },
+      colors: {
+        gradientStart: "#4f46e5", // Indigo
+        gradientMid: "#6d28d9", // Purple
+        gradientEnd: "#9333ea", // Violet
       },
     },
   },

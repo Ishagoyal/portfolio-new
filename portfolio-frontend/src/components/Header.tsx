@@ -15,7 +15,6 @@ const Header = () => {
 
   const [theme, setTheme] = useState(() => {
     if (typeof window !== "undefined") {
-      // Check system preference
       const prefersDark = window.matchMedia(
         "(prefers-color-scheme: dark)"
       ).matches;
@@ -31,7 +30,6 @@ const Header = () => {
   };
 
   useEffect(() => {
-    // Apply the theme to the root element
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
       document.documentElement.classList.remove("light");
@@ -45,28 +43,29 @@ const Header = () => {
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
         isScrolling
-          ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg"
+          ? "bg-gradient-to-r from-indigo-500 to-blue-500 dark:from-gray-900 dark:to-gray-800 backdrop-blur-lg shadow-lg"
           : "bg-transparent"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <span className="text-2xl font-bold text-gray-900 dark:text-white">
+          {/* Logo */}
+          <span className="text-3xl font-extrabold text-white hover:text-gray-300 transition-colors">
             Isha Goyal
           </span>
-          <div className="hidden md:flex items-center space-x-8">
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-              aria-label="Toggle dark mode"
-            >
-              {theme === "dark" ? (
-                <Sun className="w-5 h-5 text-gray-300" />
-              ) : (
-                <Moon className="w-5 h-5 text-gray-600" />
-              )}
-            </button>
-          </div>
+
+          {/* Theme Toggle */}
+          <button
+            onClick={toggleTheme}
+            className="p-3 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+            aria-label="Toggle dark mode"
+          >
+            {theme === "dark" ? (
+              <Sun className="w-6 h-6 text-yellow-400 transition-colors" />
+            ) : (
+              <Moon className="w-6 h-6 text-white transition-colors" />
+            )}
+          </button>
         </div>
       </div>
     </nav>
