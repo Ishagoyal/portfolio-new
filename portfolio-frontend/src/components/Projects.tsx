@@ -26,6 +26,21 @@ const projects: Project[] = [
     role: "Senior Frontend Engineer",
     link: "https://isha-weather-dashboard.netlify.app/",
   },
+  {
+    title: "Spotify Playlist Manager",
+    description:
+      "Collaborate on playlists with your friends in real-time. Search, vote,and vibe together.",
+    tech: [
+      "React",
+      "TypeScript",
+      "Tailwind",
+      "React Context API",
+      "NodeJS",
+      "Socket.IO",
+    ],
+    role: "Senior Frontend Engineer",
+    link: "https://spotify-playlist-manager-pearl.vercel.app/",
+  },
 ];
 
 const Projects = () => {
