@@ -34,21 +34,6 @@ const projects: Project[] = [
     ],
     status: "Prototype",
   },
-  {
-    title: "Spotify Playlist Manager",
-    tagline: "Making group playlists actually collaborative.",
-    problem:
-      "When friends listen together, playlist control usually belongs to one person while everyone else keeps verbally suggesting songs.",
-    solution:
-      "A real-time collaborative playlist experience where friends can search tracks, add songs, vote, and shape the queue together.",
-    themes: [
-      "Real-time Collaboration",
-      "Social Product Design",
-      "Interaction Design",
-    ],
-    status: "Shipped",
-    link: "https://spotify-playlist-manager-pearl.vercel.app/",
-  },
 ];
 
 const Projects = () => {
