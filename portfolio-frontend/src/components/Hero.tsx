@@ -31,15 +31,15 @@ const Hero = () => {
       <div className="absolute bottom-[-150px] right-[-150px] w-72 h-72 bg-purple-600/30 rounded-full blur-[120px]"></div>
 
       <div className="max-w-7xl mx-auto relative z-10 text-center">
-        <h1 className="text-5xl font-extrabold leading-tight tracking-tighter mb-4">
-          Hi, I’m <span className="text-blue-300">Isha Goyal</span>
+        <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight tracking-tighter max-w-4xl mx-auto mb-4">
+          Hi, I’m <span className="text-blue-300">Isha</span>. I build products
+          around problems I can’t stop thinking about.
         </h1>
-        <h2 className="mt-2 text-2xl font-semibold text-gray-200">
-          Crafting Exceptional Web Experiences
-        </h2>
-        <p className="mt-4 text-lg text-gray-300 max-w-2xl mx-auto">
-          I build high-performance, user-focused websites and applications using
-          modern technologies. Let's build something amazing together!
+        <p className="mt-5 text-lg leading-relaxed text-gray-200 max-w-3xl mx-auto">
+          I started as a frontend engineer, but became more interested in what we
+          should build, why someone would use it, and how to make it feel
+          effortless. Today I explore those questions by talking to users,
+          prototyping ideas, and shipping products myself.
         </p>
 
         <div className="mt-8 flex justify-center items-center space-x-6">

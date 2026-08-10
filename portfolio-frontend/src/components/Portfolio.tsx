@@ -1,5 +1,6 @@
 import ContactForm from "./ContactForm";
 import Header from "./Header";
+import HowIBuild from "./HowIBuild";
 import Hero from "./Hero";
 import Projects from "./Projects";
 import Resume from "./Resume";
@@ -11,6 +12,7 @@ const Portfolio = () => {
       <Header />
       <Hero />
       <Projects />
+      <HowIBuild />
       <WorkExperiences />
       <ContactForm />
       <Resume />

@@ -1,9 +1,12 @@
 export type Project = {
   title: string;
-  description: string;
-  tech: string[];
-  role: string;
-  link: string;
+  tagline: string;
+  problem: string;
+  solution: string;
+  themes: string[];
+  status?: string;
+  link?: string;
+  featured?: boolean;
 };
 
 export type WorkExperience = {
