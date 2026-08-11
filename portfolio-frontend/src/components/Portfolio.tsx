@@ -23,6 +23,8 @@ type JourneyItem = {
   intro?: string;
   bullets: React.ReactNode[];
   value?: React.ReactNode;
+  image?: string;
+  tags?: string[];
 };
 
 const productJourney: JourneyItem[] = [
@@ -30,6 +32,9 @@ const productJourney: JourneyItem[] = [
     company: "CookBridge",
     role: "Product Builder",
     date: "Mar 2026 — Present",
+    link: "https://cookbridge.onrender.com/",
+    image: "/images/cookbridge-project.jpg",
+    tags: ["Decision in under 2 minutes", "Household memory", "WhatsApp + LLMs"],
     eyebrow: "“Aaj khaane mein kya banaye?” / “What should we cook today?”",
     intro:
       "A small question that can show up twice a day, every day — and quietly becomes recurring mental load.",
@@ -46,6 +51,8 @@ const productJourney: JourneyItem[] = [
     company: "AI Fashion Stylist",
     role: "Product Builder",
     date: "Dec 2025 — Feb 2026",
+    image: "/images/ai-fashion-stylist-project.jpg",
+    tags: ["Digital wardrobe", "3 relevant outfits", "Learns from choices"],
     eyebrow: "“Full wardrobe, but nothing to wear?”",
     bullets: [
       <>Started from my own frustration, researched <strong>Acloset and Indyx</strong>, spoke with the Indyx founder, and studied how people organise wardrobes and choose outfits.</>,
@@ -71,7 +78,6 @@ const engineeringJourney: JourneyItem[] = [
     company: "JediSwap & Hackathons",
     role: "Frontend Engineer",
     date: "Jul 2023 — Oct 2024",
-    link: "https://www.jediswap.xyz/",
     bullets: [
       <>Moved into <strong>Web3 and blockchain</strong> to deliberately explore a new technology space.</>,
       <>Built Starknet experiences at JediSwap, including <strong>JediSwap Missions</strong>, simplifying wallets, NFTs, and transactions into usable product flows.</>,
@@ -120,6 +126,34 @@ const JourneyCard = ({ item, index }: { item: JourneyItem; index: number }) => (
   </article>
 );
 
+const ProjectFeature = ({ item, index }: { item: JourneyItem; index: number }) => (
+  <article className="project-feature">
+    <div className="project-visual">
+      <img src={item.image} alt={item.company === "CookBridge" ? "Indian home-cooked meal planning with a phone assistant" : "Personal wardrobe with three digital outfit suggestions"} />
+      <span>{String(index + 1).padStart(2, "0")}</span>
+    </div>
+    <div className="project-story">
+      <div className="project-meta">
+        <span>{item.role}</span>
+        <time>{item.date}</time>
+      </div>
+      <h3>{item.company}</h3>
+      {item.eyebrow && <p className="project-question">{item.eyebrow}</p>}
+      {item.intro && <p className="journey-intro">{item.intro}</p>}
+      <ul>
+        {item.bullets.map((bullet, bulletIndex) => <li key={bulletIndex}>{bullet}</li>)}
+      </ul>
+      {item.value && <p className="value"><span>Value</span>{item.value}</p>}
+      <div className="project-actions">
+        <div className="project-tags">
+          {item.tags?.map((tag) => <span key={tag}>{tag}</span>)}
+        </div>
+        {item.link && <a className="project-link" href={item.link} target="_blank" rel="noreferrer">Visit product <ArrowUpRight size={16} /></a>}
+      </div>
+    </div>
+  </article>
+);
+
 const SectionTitle = ({ number, children }: { number: string; children: React.ReactNode }) => (
   <div className="section-title">
     <span>{number}</span>
@@ -151,7 +185,6 @@ const Portfolio = () => {
             <div className="hero-links">
               <a href={links.email}>Email ↗</a>
               <a href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a>
-              <a href="#profile">Portfolio ↗</a>
               <a href={links.github} target="_blank" rel="noreferrer">GitHub ↗</a>
             </div>
           </div>
@@ -167,8 +200,8 @@ const Portfolio = () => {
 
         <section className="journey-section section-wrap" id="journey">
           <SectionTitle number="02">Product journey</SectionTitle>
-          <div className="timeline">
-            {productJourney.map((item, index) => <JourneyCard key={item.company} item={item} index={index} />)}
+          <div className="project-showcase">
+            {productJourney.map((item, index) => <ProjectFeature key={item.company} item={item} index={index} />)}
           </div>
         </section>
 
