@@ -64,65 +64,33 @@ const productJourney: JourneyItem[] = [
   },
 ];
 
-const engineeringJourney: JourneyItem[] = [
-  {
-    company: "Alpha Nodus",
-    role: "Senior Software Developer",
-    date: "Jun 2025 — Aug 2025",
-    bullets: [
-      <>Shipped <strong>Greeter/Kiosk</strong>, a healthcare check-in product, across frontend, integrations, infrastructure, and deployment.</>,
-      <>Expanded beyond frontend implementation into broader ownership of <strong>getting the product into production.</strong></>,
-    ],
-  },
-  {
-    company: "JediSwap & Hackathons",
-    role: "Frontend Engineer",
-    date: "Jul 2023 — Oct 2024",
-    bullets: [
-      <>Moved into <strong>Web3 and blockchain</strong> to deliberately explore a new technology space.</>,
-      <>Built Starknet experiences at JediSwap, including <strong>JediSwap Missions</strong>, simplifying wallets, NFTs, and transactions into usable product flows.</>,
-      <>Extended the learning through <strong>ETHIndia and Starknet Hacker House</strong>, building GlassChain and TailTales from idea → working product under tight timelines.</>,
-    ],
-  },
-  {
-    company: "Playment / TELUS International AI Data Solutions",
-    role: "Senior Frontend Developer",
-    date: "Dec 2019 — Feb 2023",
-    link: "https://jarvis.playment.io/",
-    intro: "Grew from frontend engineer to senior ownership across products, architecture, and product decisions.",
-    bullets: [
-      <>Took ownership of <strong>GT Studio</strong>, a core platform for annotation projects, workflows, organisations, and annotator performance.</>,
-      <>Moved beyond implementation into <strong>product discussions and workflow decisions.</strong></>,
-      <>Consolidated <strong>5 frontend repositories into a monorepo</strong>, reducing duplicated development and improving shared code reuse.</>,
-      <>Built <strong>Pixel</strong>, a reusable React component library, and worked on complex annotation interfaces using KonvaJS and Three.js.</>,
-    ],
-  },
+type EngineeringStep = {
+  role: string;
+  period: string;
+  focus: string;
+  description: string;
+  tags: string[];
+};
+
+const engineeringJourney: EngineeringStep[] = [
+  { role: "Intern", period: "Where it began", focus: "Learning by building", description: "My first experience turning designs and requirements into real web experiences. I learned how a production codebase works, how to ask better questions, and why the details matter to the person using the product.", tags: ["Web foundations", "Production code", "Curiosity"] },
+  { role: "Junior Engineer", period: "Building confidence", focus: "Shipping with care", description: "Started owning features end to end—reading unfamiliar code, collaborating closely with others, and learning to balance speed with quality. This is where building for the user became a habit, not just a requirement.", tags: ["Frontend development", "Collaboration", "User empathy"] },
+  { role: "Software Engineer", period: "Owning the whole feature", focus: "From problem to shipped product", description: "Expanded from interfaces into the systems behind them: APIs, data, workflows, and reliability. I learned to turn an ambiguous problem into a useful product flow, then ship it with the right level of technical rigour.", tags: ["End-to-end delivery", "System design", "Product thinking"] },
+  { role: "Senior Software Engineer", period: "Product-minded leadership", focus: "Leading people and product outcomes", description: "Began understanding products in depth—not only how to build them, but what is worth building and why. I led a team, guided technical decisions, and partnered on product direction to make complex work clearer for both the team and the user.", tags: ["Team leadership", "Product strategy", "Technical direction"] },
 ];
 
-const JourneyCard = ({ item, index }: { item: JourneyItem; index: number }) => (
-  <article className="journey-card">
-    <div className="timeline-marker" aria-hidden="true">
-      {String(index + 1).padStart(2, "0")}
-    </div>
-    <div className="journey-heading">
-      <div>
-        <h3>
-          {item.link ? (
-            <a href={item.link} target="_blank" rel="noreferrer">
-              {item.company}<ArrowUpRight size={17} />
-            </a>
-          ) : item.company}
-        </h3>
-        <p className="role">{item.role}</p>
+const EngineeringJourneyStep = ({ item, index }: { item: EngineeringStep; index: number }) => (
+  <article className={`engineering-step${index % 2 ? " engineering-step--right" : ""}`}>
+    <div className="engineering-content">
+      <p className="engineering-period">{item.period}</p>
+      <h3>{item.role}</h3>
+      <p className="engineering-focus">{item.focus}</p>
+      <p className="engineering-description">{item.description}</p>
+      <div className="engineering-tags">
+        {item.tags.map((tag) => <span key={tag}>{tag}</span>)}
       </div>
-      <time>{item.date}</time>
     </div>
-    {item.eyebrow && <p className="project-question">{item.eyebrow}</p>}
-    {item.intro && <p className="journey-intro">{item.intro}</p>}
-    <ul>
-      {item.bullets.map((bullet, bulletIndex) => <li key={bulletIndex}>{bullet}</li>)}
-    </ul>
-    {item.value && <p className="value"><span>Value</span>{item.value}</p>}
+    <span className="engineering-marker" aria-hidden="true" />
   </article>
 );
 
@@ -181,7 +149,7 @@ const Portfolio = () => {
           <div className="hero-kicker">Product builder — 0→1 & AI products</div>
           <h1>Isha<br />Goyal<span>.</span></h1>
           <div className="hero-grid">
-            <p className="hero-title">Product Builder — 6+ years in engineering — building AI & 0→1 products people actually keep open.</p>
+            <p className="hero-title">Product builder with 6+ years in engineering, turning ideas into user-first products people come back to.</p>
             <div className="hero-links">
               <a href={links.email}>Email ↗</a>
               <a href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a>
@@ -207,19 +175,8 @@ const Portfolio = () => {
 
         <section className="journey-section engineering section-wrap">
           <SectionTitle number="03">Engineering journey</SectionTitle>
-          <div className="timeline">
-            {engineeringJourney.map((item, index) => <JourneyCard key={item.company} item={item} index={index} />)}
-          </div>
-          <div className="earlier-experience">
-            <span>Earlier experience</span>
-            <div>
-              <a href="https://portal.clearglass.com/auth/login" target="_blank" rel="noreferrer"><strong>ClearGlass Analytics</strong><ArrowUpRight size={15} /></a>
-              <p>Frontend Developer · Investment analytics dashboards and data-heavy interfaces.</p>
-            </div>
-            <div>
-              <strong>Unifize Solutions</strong>
-              <p>Frontend Developer Intern · Started my engineering career building web product experiences.</p>
-            </div>
+          <div className="engineering-timeline">
+            {engineeringJourney.map((item, index) => <EngineeringJourneyStep key={item.role} item={item} index={index} />)}
           </div>
         </section>
 
@@ -228,20 +185,12 @@ const Portfolio = () => {
           <div className="skill-grid">
             <div>
               <h3>Product</h3>
-              <p>Product Discovery · User Research · Problem Definition · MVP Scoping · User Flows · Experimentation · 0→1 Product Development</p>
+              <div className="skill-tags"><span>0→1 Products</span><span>Product Discovery</span><span>User Research</span><span>Problem Definition</span><span>MVP Scoping</span><span>User Flows</span><span>Experimentation</span><span>Product Strategy</span></div>
             </div>
             <div>
               <h3>AI & Engineering</h3>
-              <p>LLM Product Design · Prompt Design · AI Agents · Context & Memory · JavaScript · TypeScript · React · Next.js · Redux · Node.js · GraphQL · MongoDB · AWS</p>
+              <div className="skill-tags"><span>React / TypeScript</span><span>JavaScript</span><span>Node.js</span><span>System Design</span><span>Design Systems</span><span>APIs & Integrations</span><span>LLM Product Design</span><span>AI Agents</span></div>
             </div>
-          </div>
-        </section>
-
-        <section className="education section-wrap">
-          <SectionTitle number="05">Education</SectionTitle>
-          <div className="education-card">
-            <div className="education-icon">B.</div>
-            <div><h3>B.Tech, Computer Science & Engineering</h3><p>Rajasthan Technical University</p><p>Poornima College of Engineering, Jaipur</p></div>
           </div>
         </section>
       </main>
