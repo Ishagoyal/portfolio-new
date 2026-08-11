@@ -34,7 +34,7 @@ const productJourney: JourneyItem[] = [
     date: "Mar 2026 — Present",
     link: "https://cookbridge.onrender.com/",
     image: "/images/cookbridge-project.jpg",
-    tags: ["Decision in under 2 minutes", "Household memory", "WhatsApp + LLMs"],
+    tags: ["Problem discovery", "Focused MVPs", "Understanding user behaviour"],
     eyebrow: "“Aaj khaane mein kya banaye?” / “What should we cook today?”",
     intro:
       "A small question that can show up twice a day, every day — and quietly becomes recurring mental load.",
@@ -52,7 +52,7 @@ const productJourney: JourneyItem[] = [
     role: "Product Builder",
     date: "Dec 2025 — Feb 2026",
     image: "/images/ai-fashion-stylist-project.jpg",
-    tags: ["Digital wardrobe", "3 relevant outfits", "Learns from choices"],
+    tags: ["Research-led product insights", "Problem decomposition", "Value–cost trade-offs"],
     eyebrow: "“Full wardrobe, but nothing to wear?”",
     bullets: [
       <>Started from my own frustration, researched <strong>Acloset and Indyx</strong>, spoke with the Indyx founder, and studied how people organise wardrobes and choose outfits.</>,
@@ -161,8 +161,7 @@ const Portfolio = () => {
         <section className="profile section-wrap" id="profile">
           <SectionTitle number="01">Profile</SectionTitle>
           <div className="profile-copy">
-            <p>Product builder with <strong>6+ years of software engineering experience</strong>, focused on taking products from <mark>problem discovery → product decisions → MVP → shipped experience.</mark></p>
-            <p>I approach product decisions from both sides — <strong>what the user actually needs and what technology can make possible</strong> — then simplify the problem and build the right solution.</p>
+            <p>I’m a product builder with <strong>6+ years of software engineering experience</strong>. I take products from <mark>problem discovery and product decisions to an MVP and a launched experience.</mark></p>
           </div>
         </section>
 
