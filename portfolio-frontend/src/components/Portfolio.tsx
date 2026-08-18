@@ -1,10 +1,4 @@
-import {
-  ArrowUpRight,
-  Download,
-  MapPin,
-  Moon,
-  Sun,
-} from "lucide-react";
+import { ArrowUpRight, Download, MapPin, Moon, Sun } from "lucide-react";
 import { useState } from "react";
 
 const links = {
@@ -13,56 +7,6 @@ const links = {
   github: "https://github.com/Ishagoyal",
   resume: "/Isha Resume.pdf",
 };
-
-type JourneyItem = {
-  company: string;
-  role: string;
-  date: string;
-  link?: string;
-  eyebrow?: string;
-  intro?: string;
-  bullets: React.ReactNode[];
-  value?: React.ReactNode;
-  image?: string;
-  tags?: string[];
-};
-
-const productJourney: JourneyItem[] = [
-  {
-    company: "CookBridge",
-    role: "Product Builder",
-    date: "Mar 2026 — Present",
-    link: "https://cookbridge.onrender.com/",
-    image: "/images/cookbridge-project.jpg",
-    tags: ["Problem discovery", "Focused MVPs", "Understanding user behaviour"],
-    eyebrow: "“Aaj khaane mein kya banaye?” / “What should we cook today?”",
-    intro:
-      "A small question that can show up twice a day, every day — and quietly becomes recurring mental load.",
-    bullets: [
-      <>Started with my own household, then spoke to others with cooks to understand <strong>who owns the decision, when it becomes frustrating, and how they solve it today.</strong></>,
-      <><strong>Key learning:</strong> recipes were never the real problem. The harder part was remembering context, deciding, and getting that decision to the cook.</>,
-      <>Narrowed CookBridge to one outcome: <strong>decide what to cook and get it to the cook in under 2 minutes.</strong></>,
-      <>Iterated around meal history, preferences, ingredients, grocery gaps, and cook communication — removing anything that created more effort.</>,
-      <>Chose <strong>WhatsApp + LLMs + household memory</strong> so the product fits an existing habit and improves with context instead of becoming another app to manage.</>,
-    ],
-    value: <>less decision fatigue, less back-and-forth, and a faster path from <strong>“what should we eat?” → “this is what we’re cooking.”</strong></>,
-  },
-  {
-    company: "AI Fashion Stylist",
-    role: "Product Builder",
-    date: "Dec 2025 — Feb 2026",
-    image: "/images/ai-fashion-stylist-project.jpg",
-    tags: ["Research-led product insights", "Problem decomposition", "Value–cost trade-offs"],
-    eyebrow: "“Full wardrobe, but nothing to wear?”",
-    bullets: [
-      <>Started from my own frustration, researched <strong>Acloset and Indyx</strong>, spoke with the Indyx founder, and studied how people organise wardrobes and choose outfits.</>,
-      <>Broke the problem into two parts: <strong>understand what the user owns</strong>, then help decide what works for their occasion, mood, weather, and comfort.</>,
-      <>Built a digital wardrobe from photos and designed the system to <strong>mix-and-match 3 relevant outfit options</strong> from the user’s own clothes.</>,
-      <>Planned recommendations to improve from user choices over time rather than repeatedly asking the same preferences.</>,
-      <>Stopped before expanding after learning that <strong>AI inference cost matters even during validation</strong> — changing how I now evaluate the cost of an input against the value of its output.</>,
-    ],
-  },
-];
 
 type EngineeringStep = {
   role: string;
@@ -73,11 +17,53 @@ type EngineeringStep = {
 };
 
 const engineeringJourney: EngineeringStep[] = [
-  { role: "Intern", period: "Where it began", focus: "Learning by building", description: "My first experience turning designs and requirements into real web experiences. I learned how a production codebase works, how to ask better questions, and why the details matter to the person using the product.", tags: ["Web foundations", "Production code", "Curiosity"] },
-  { role: "Junior Engineer", period: "Building confidence", focus: "Shipping with care", description: "Started owning features end to end—reading unfamiliar code, collaborating closely with others, and learning to balance speed with quality. This is where building for the user became a habit, not just a requirement.", tags: ["Frontend development", "Collaboration", "User empathy"] },
-  { role: "Software Engineer", period: "Owning the whole feature", focus: "From problem to shipped product", description: "Expanded from interfaces into the systems behind them: APIs, data, workflows, and reliability. I learned to turn an ambiguous problem into a useful product flow, then ship it with the right level of technical rigour.", tags: ["End-to-end delivery", "System design", "Product thinking"] },
-  { role: "Senior Software Engineer", period: "Product-minded leadership", focus: "Leading people and product outcomes", description: "Began understanding products in depth—not only how to build them, but what is worth building and why. I led a team, guided technical decisions, and partnered on product direction to make complex work clearer for both the team and the user.", tags: ["Team leadership", "Product strategy", "Technical direction"] },
+  {
+    role: "Production ownership",
+    period: "Alpha Nodus",
+    focus: "From interface to operating product",
+    description:
+      "Ownership expanded from frontend into APIs, integrations, infrastructure and AWS deployment for the Greeter/Kiosk healthcare product. It made the operational constraints behind a product decision impossible to ignore.",
+    tags: ["APIs & integrations", "AWS deployment", "Product delivery"],
+  },
+  {
+    role: "Architecture leverage",
+    period: "Playment / TELUS",
+    focus: "Shared foundations make teams faster",
+    description:
+      "Consolidated five frontend repositories into one monorepo and helped build shared product foundations, including the Pixel React component library. The work sharpened how I think about leverage, consistency and implementation cost.",
+    tags: ["Monorepo", "Design systems", "Technical strategy"],
+  },
+  {
+    role: "Complex technical products",
+    period: "Engineering foundation",
+    focus: "Making complicated systems usable",
+    description:
+      "Worked on data-heavy annotation interfaces as well as Web3/Starknet workflows, wallets, NFTs and transactions. Those experiences taught me to surface the right complexity to users while giving engineers unambiguous product intent.",
+    tags: ["Complex workflows", "System design", "User clarity"],
+  },
 ];
+
+const workSteps = [
+  ["Problem", "Understand the behaviour and friction before discussing features."],
+  ["Evidence", "Talk to users, inspect existing behaviour and separate assumptions from signals."],
+  ["Scope", "Choose the smallest test that can answer the important product question."],
+  ["Prototype", "Make the experience tangible early instead of debating abstractions."],
+  ["Measure", "Define success before interpreting usage."],
+  ["Iterate", "Use failures to decide whether the problem, context, UX or system assumption is wrong."],
+];
+
+const SectionTitle = ({ number, children }: { number: string; children: React.ReactNode }) => (
+  <div className="section-title">
+    <span>{number}</span>
+    <h2>{children}</h2>
+  </div>
+);
+
+const Tags = ({ items }: { items: string[] }) => (
+  <div className="project-tags">
+    {items.map((item) => <span key={item}>{item}</span>)}
+  </div>
+);
 
 const EngineeringJourneyStep = ({ item, index }: { item: EngineeringStep; index: number }) => (
   <article className={`engineering-step${index % 2 ? " engineering-step--right" : ""}`}>
@@ -94,39 +80,106 @@ const EngineeringJourneyStep = ({ item, index }: { item: EngineeringStep; index:
   </article>
 );
 
-const ProjectFeature = ({ item, index }: { item: JourneyItem; index: number }) => (
-  <article className="project-feature">
+const CookBridgeCaseStudy = () => (
+  <article className="project-feature case-study" id="cookbridge">
     <div className="project-visual">
-      <img src={item.image} alt={item.company === "CookBridge" ? "Indian home-cooked meal planning with a phone assistant" : "Personal wardrobe with three digital outfit suggestions"} />
-      <span>{String(index + 1).padStart(2, "0")}</span>
+      <img src="/images/cookbridge-project.jpg" alt="Indian home-cooked meal planning with a phone assistant" />
+      <span>01</span>
     </div>
     <div className="project-story">
-      <div className="project-meta">
-        <span>{item.role}</span>
-        <time>{item.date}</time>
+      <div className="project-meta"><span>Technical Product Manager / Product Builder</span><time>0→1 case study</time></div>
+      <h3>CookBridge</h3>
+      <p className="project-question">“Aaj khaane mein kya banaye?” / “What should we cook today?”</p>
+
+      <div className="case-block">
+        <p className="case-label">The problem</p>
+        <p>Daily meal decisions in households with cooks require someone to combine what is available at home, recent meals, diet, preferences, health, taste and what the cook needs to hear. The core problem is <strong>context + decision + communication</strong>, not recipes.</p>
       </div>
-      <h3>{item.company}</h3>
-      {item.eyebrow && <p className="project-question">{item.eyebrow}</p>}
-      {item.intro && <p className="journey-intro">{item.intro}</p>}
-      <ul>
-        {item.bullets.map((bullet, bulletIndex) => <li key={bulletIndex}>{bullet}</li>)}
-      </ul>
-      {item.value && <p className="value"><span>Value</span>{item.value}</p>}
-      <div className="project-actions">
-        <div className="project-tags">
-          {item.tags?.map((tag) => <span key={tag}>{tag}</span>)}
+
+      <div className="evidence-row" aria-label="CookBridge research evidence">
+        <div><strong>10</strong><span>households researched</span></div>
+        <div><strong>7/10</strong><span>experienced recurring meal-decision friction</span></div>
+      </div>
+      <p className="case-note">Research showed different household behaviours, so I narrowed the first version instead of trying to serve everyone.</p>
+
+      <div className="case-block">
+        <p className="case-label">The product decision</p>
+        <p>V1 focuses on <strong>working professionals who are the primary meal-decider in a family household with a cook.</strong></p>
+        <p className="case-muted">Deliberately out of scope: perfect real-time inventory, grocery ordering integrations, cook interaction, WhatsApp groups, detailed nutrition tracking and a full recipe product.</p>
+      </div>
+
+      <div className="case-block">
+        <p className="case-label">From discovery to engineering</p>
+        <div className="process-flow" aria-label="Product development process">
+          {['Problem', 'Hypothesis', 'User flow', 'Scope', 'Functional requirements', 'Edge cases', 'Acceptance criteria', 'Measurement'].map((step) => <span key={step}>{step}</span>)}
         </div>
-        {item.link && <a className="project-link" href={item.link} target="_blank" rel="noreferrer">Visit product <ArrowUpRight size={16} /></a>}
+        <p>I defined expected behaviour across household context, recommendations, preference learning, session recovery, meal confirmation and inventory impact so engineering would not have to make hidden product decisions.</p>
       </div>
+
+      <div className="tradeoff-block">
+        <p className="case-label">The hard product / technical trade-off</p>
+        <h4>Accuracy vs user effort</h4>
+        <p>CookBridge is useful when it knows what is at home. But repeatedly checking the fridge or manually maintaining inventory defeats the purpose of reducing mental effort.</p>
+        <p className="principle">Passive signals <b>→</b> Simple actions <b>→</b> Existing artifacts <b>→</b> Manual entry</p>
+        <p>I treated recurring high-effort inventory maintenance as an <strong>adoption risk</strong>, not only a data-quality problem. Inventory can use uncertainty states — <strong>Available / Low / Probably Finished / Unknown</strong> — rather than requiring perfect quantities.</p>
+      </div>
+
+      <div className="prototype-cta">
+        <span>Prototype</span>
+        <a className="project-link" href="https://cookbridge-whats-for-tea.lovable.app" target="_blank" rel="noreferrer">Try Interactive Prototype <ArrowUpRight size={16} /></a>
+        <p>I used prototyping to make the intended experience tangible before committing more engineering effort.</p>
+      </div>
+
+      <div className="case-block metrics-block">
+        <p className="case-label">What would prove this works?</p>
+        <p className="case-note">These are the measurements I defined for the test, not achieved results.</p>
+        <div className="metric-grid">
+          <div><h4>Meal-decision time</h4><p>Time from decision-session start to final meal confirmation.</p></div>
+          <div><h4>Manual fridge checking</h4><p>Whether the user still needs to physically check the fridge during the decision.</p></div>
+        </div>
+        <p className="case-muted">Supporting diagnostics: completion rate, recommendation acceptance rate, recommendation rounds before confirmation, repeat usage and acceptance change over repeated usage.</p>
+      </div>
+
+      <div className="next-question"><p className="case-label">What I am testing next</p><p>Can CookBridge maintain enough household and ingredient context to make useful recommendations without creating high recurring effort for the user?</p></div>
+      <Tags items={["7/10 problem validation", "0→1", "Product requirements", "AI / LLM", "Interactive prototype", "Success metrics", "Adoption trade-offs"]} />
     </div>
   </article>
 );
 
-const SectionTitle = ({ number, children }: { number: string; children: React.ReactNode }) => (
-  <div className="section-title">
-    <span>{number}</span>
-    <h2>{children}</h2>
-  </div>
+const FashionStylistCaseStudy = () => (
+  <article className="project-feature case-study fashion-case" id="ai-fashion-stylist">
+    <div className="project-visual">
+      <img src="/images/ai-fashion-stylist-project.jpg" alt="Personal wardrobe with three digital outfit suggestions" />
+      <span>02</span>
+    </div>
+    <div className="project-story">
+      <div className="project-meta"><span>Product Builder</span><time>Working prototype</time></div>
+      <h3>AI Fashion Stylist</h3>
+      <p className="project-question">“Full wardrobe, but nothing to wear?”</p>
+
+      <div className="case-block">
+        <p className="case-label">Problem / discovery</p>
+        <p>I started from my own frustration, researched Acloset and Indyx, spoke with the Indyx founder and studied how people organise wardrobes and decide what to wear.</p>
+      </div>
+      <div className="case-block">
+        <p className="case-label">Product decomposition</p>
+        <p><strong>1. Understand what the user owns</strong><br />then<br /><strong>2. Decide what works for the user’s context</strong></p>
+        <p className="principle">Wardrobe photos <b>→</b> item extraction <b>→</b> context / vibe <b>→</b> outfit recommendation <b>→</b> feedback</p>
+      </div>
+
+      <div className="proof-flow" aria-label="AI Fashion Stylist prototype proof points"><div><strong>5</strong><span>wardrobe photos</span></div><b>↓</b><div><strong>18</strong><span>clothing / accessory items detected</span></div><b>↓</b><div><strong>3</strong><span>outfit recommendations using only owned items</span></div></div>
+
+      <div className="video-wrap">
+        <video controls playsInline preload="metadata" poster="/images/ai-fashion-stylist-project.jpg" aria-label="AI Fashion Stylist prototype demo">
+          <source src="/videos/ai-fashion-stylist-demo.mp4" type="video/mp4" />
+          Your browser does not support the embedded AI Fashion Stylist demo video.
+        </video>
+      </div>
+
+      <div className="next-question fashion-learning"><p className="case-label">What changed my thinking</p><p>AI inference cost became part of the validation problem. Instead of continuing to add features, I stopped expansion and treated <strong>value vs inference cost</strong> as part of the product question.</p></div>
+      <Tags items={["Working AI prototype", "5 photos → 18 items", "LLM / vision workflow", "Product decomposition", "Cost trade-off"]} />
+    </div>
+  </article>
 );
 
 const Portfolio = () => {
@@ -137,73 +190,36 @@ const Portfolio = () => {
       <header className="topbar">
         <a className="monogram" href="#top" aria-label="Back to top">IG<span>.</span></a>
         <div className="header-actions">
-          <button className="theme-toggle" onClick={() => setDark(!dark)} aria-label={dark ? "Use light theme" : "Use dark theme"}>
-            {dark ? <Sun size={17} /> : <Moon size={17} />}
-          </button>
+          <button className="theme-toggle" onClick={() => setDark(!dark)} aria-label={dark ? "Use light theme" : "Use dark theme"}>{dark ? <Sun size={17} /> : <Moon size={17} />}</button>
           <a className="download-button" href={links.resume} target="_blank" rel="noreferrer"><Download size={16} /> Download PDF</a>
         </div>
       </header>
 
       <main>
         <section className="hero" id="top">
-          <div className="hero-kicker">Product builder — 0→1 & AI products</div>
+          <div className="hero-kicker">Technical Product Manager · 0→1 AI Products · Engineering Foundation</div>
           <h1>Isha<br />Goyal<span>.</span></h1>
           <div className="hero-grid">
-            <p className="hero-title">Product builder with 6+ years in engineering, turning ideas into user-first products people come back to.</p>
-            <div className="hero-links">
-              <a href={links.email}>Email ↗</a>
-              <a href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a>
-              <a href={links.github} target="_blank" rel="noreferrer">GitHub ↗</a>
-            </div>
+            <p className="hero-title">I turn ambiguous user problems into validated, scoped and testable products — combining product judgment with 6+ years of engineering depth.</p>
+            <div className="hero-links"><a href={links.email}>Email ↗</a><a href={links.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a><a href={links.github} target="_blank" rel="noreferrer">GitHub ↗</a></div>
           </div>
         </section>
 
         <section className="profile section-wrap" id="profile">
           <SectionTitle number="01">Profile</SectionTitle>
-          <div className="profile-copy">
-            <p>I’m a product builder with <strong>6+ years of software engineering experience</strong>. I take products from <mark>problem discovery and product decisions to an MVP and a launched experience.</mark></p>
-          </div>
+          <div className="profile-copy"><p>I spent <strong>6+ years learning how products are actually engineered.</strong> Today I use that depth earlier in the lifecycle — understanding the problem, talking to users, defining what should be built, making technical/product trade-offs, prototyping ideas and giving engineering enough clarity to execute.</p><p>The resume tells you what I shipped. <mark>The case studies below show how I think.</mark></p></div>
         </section>
 
-        <section className="journey-section section-wrap" id="journey">
-          <SectionTitle number="02">Product journey</SectionTitle>
-          <div className="project-showcase">
-            {productJourney.map((item, index) => <ProjectFeature key={item.company} item={item} index={index} />)}
-          </div>
-        </section>
+        <section className="journey-section section-wrap" id="case-studies"><SectionTitle number="02">Case studies</SectionTitle><div className="project-showcase"><CookBridgeCaseStudy /><FashionStylistCaseStudy /></div></section>
 
-        <section className="journey-section engineering section-wrap">
-          <SectionTitle number="03">Engineering journey</SectionTitle>
-          <div className="engineering-timeline">
-            {engineeringJourney.map((item, index) => <EngineeringJourneyStep key={item.role} item={item} index={index} />)}
-          </div>
-        </section>
+        <section className="how-i-work section-wrap"><SectionTitle number="03">How I work</SectionTitle><div className="work-flow">{workSteps.map(([title, copy], index) => <article key={title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{copy}</p></article>)}</div></section>
 
-        <section className="skills section-wrap" id="skills">
-          <SectionTitle number="04">Skills</SectionTitle>
-          <div className="skill-grid">
-            <div>
-              <h3>Product</h3>
-              <div className="skill-tags"><span>0→1 Products</span><span>Product Discovery</span><span>User Research</span><span>Problem Definition</span><span>MVP Scoping</span><span>User Flows</span><span>Experimentation</span><span>Product Strategy</span></div>
-            </div>
-            <div>
-              <h3>AI & Engineering</h3>
-              <div className="skill-tags"><span>React / TypeScript</span><span>JavaScript</span><span>Node.js</span><span>System Design</span><span>Design Systems</span><span>APIs & Integrations</span><span>LLM Product Design</span><span>AI Agents</span></div>
-            </div>
-          </div>
-        </section>
+        <section className="journey-section engineering section-wrap"><SectionTitle number="04">Engineering foundation</SectionTitle><div className="engineering-intro">Why my engineering background makes me a better technical product person.</div><div className="engineering-timeline">{engineeringJourney.map((item, index) => <EngineeringJourneyStep key={item.role} item={item} index={index} />)}</div></section>
+
+        <section className="skills section-wrap" id="skills"><SectionTitle number="05">Skills</SectionTitle><div className="skill-grid"><div><h3>Product</h3><div className="skill-tags"><span>Technical Product Management</span><span>Product Discovery</span><span>User Research</span><span>Problem Definition</span><span>Product Requirements / PRDs</span><span>MVP Scoping</span><span>Acceptance Criteria</span><span>Success Metrics</span><span>Experimentation</span><span>0→1 Products</span></div></div><div><h3>AI & Engineering</h3><div className="skill-tags"><span>LLM Product Design</span><span>AI Agents</span><span>Prompt Design</span><span>Context & Memory</span><span>APIs & Integrations</span><span>System Design</span><span>React / TypeScript</span><span>Node.js</span><span>MongoDB</span><span>AWS</span></div></div></div></section>
       </main>
 
-      <footer>
-        <div>
-          <p>Have an interesting problem?</p>
-          <a href={links.email}>Let’s talk.<ArrowUpRight /></a>
-        </div>
-        <div className="footer-meta">
-          <span><MapPin size={15} /> Bengaluru, India</span>
-          <span>© {new Date().getFullYear()} Isha Goyal</span>
-        </div>
-      </footer>
+      <footer><div><p>Have an interesting problem?</p><a href={links.email}>Let’s talk.<ArrowUpRight /></a></div><div className="footer-meta"><span><MapPin size={15} /> Bengaluru, India</span><span>© {new Date().getFullYear()} Isha Goyal</span></div></footer>
     </div>
   );
 };
