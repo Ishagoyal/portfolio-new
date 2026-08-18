@@ -6,7 +6,7 @@ const projects: Project[] = [
     title: "CookBridge",
     tagline: "Taking ‘Aaj kya banaye?’ off your mental load.",
     problem:
-      "Households with cooks still spend energy deciding meals, checking ingredients, coordinating, and remembering what was eaten recently.",
+      "The primary meal-decider in a family household with a cook still spends energy deciding meals, checking ingredients, coordinating, and remembering what was eaten recently.",
     solution:
       "A WhatsApp-first household food assistant that remembers preferences, considers recent meals and available ingredients, then turns decisions into cook-ready messages. I’m exploring how it can infer inventory changes from everyday conversations instead of creating another tracking chore.",
     themes: [
