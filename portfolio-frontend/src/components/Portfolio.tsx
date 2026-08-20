@@ -63,6 +63,13 @@ const Tags = ({ items }: { items: string[] }) => (
   </div>
 );
 
+const DeepDive = ({ title, children }: { title: string; children: React.ReactNode }) => (
+  <details className="deep-dive">
+    <summary><span>Deep dive</span>{title}<b>+</b></summary>
+    <div className="deep-dive-content">{children}</div>
+  </details>
+);
+
 const EngineeringJourneyStep = ({ item, index }: { item: EngineeringStep; index: number }) => (
   <article className={`engineering-step${index % 2 ? " engineering-step--right" : ""}`}>
     <div className="engineering-content">
@@ -85,54 +92,66 @@ const CookBridgeCaseStudy = () => (
       <span>01</span>
     </div>
     <div className="project-story">
-      <div className="project-meta"><span>Technical Product Manager / Product Builder</span><time>0→1 case study</time></div>
+      <div className="project-meta"><span>Technical Product Manager / AI Product Builder</span><time>0→1 case study</time></div>
       <div className="cookbridge-heading">
         <h3>CookBridge</h3>
-        <p className="project-question">“Aaj khaane mein kya banaye?” / “What should we cook today?”</p>
+        <p className="project-question">Taking “Aaj khane mein kya banega?” out of the household’s head.</p>
         <a className="prototype-link" href="https://cookbridge-whats-for-tea.lovable.app" target="_blank" rel="noreferrer">Try Prototype <ArrowUpRight size={16} /></a>
       </div>
       <p className="prototype-note">Interactive prototype used to test the intended experience before committing more engineering effort.</p>
+      <Tags items={["0→1 Product", "User Research", "AI", "Prototype"]} />
 
       <div className="evidence-row" aria-label="CookBridge research evidence">
-        <div><strong>10</strong><span>households researched</span></div>
-        <div><strong>7/10</strong><span>experienced recurring meal-decision friction</span></div>
+        <div><strong>7/10</strong><span>households experienced the problem</span></div>
+        <div><strong>2 modes</strong><span>Suggest Meals / I Have Ingredients</span></div>
+        <div><strong>Now</strong><span>prototype → self-testing</span></div>
       </div>
-      <p className="case-note">The research changed what I thought CookBridge needed to solve.</p>
+      <p className="case-note">Research changed what I thought CookBridge needed to solve.</p>
 
       <div className="decision-block">
-        <p className="case-label">Decision 01</p>
-        <h4>The problem was not recipes</h4>
-        <p><span>Initial assumption</span>I thought the problem was helping people decide what meal to cook.</p>
-        <p><span>What research changed</span>The recurring friction was combining recent meals, preferences, diet, available ingredients, health and taste considerations — then communicating the decision to the cook.</p>
+        <p className="case-label">Research insight</p>
+        <h4>The decision depends on more than the meal</h4>
+        <p>The recurring friction was combining household context, then communicating a cook-ready decision.</p>
+        <div className="context-flow" aria-label="Household context CookBridge considers"><span>Diet</span><span>Preferences</span><span>Recent meals</span><span>Available ingredients</span></div>
         <p className="decision-result"><span>Product decision</span><strong>Context + decision + communication</strong>, not recipe discovery.</p>
       </div>
 
       <div className="decision-block decision-block--highlight">
-        <p className="case-label">Decision 02</p>
-        <h4>Perfect inventory could make the product worse</h4>
-        <p><span>Initial assumption</span>Useful recommendations require accurate knowledge of what is in the fridge.</p>
-        <p><span>What changed</span>Photos, manual inventory updates and repeated fridge checks create recurring work — directly conflicting with the promise of reducing mental load.</p>
-        <p className="principle">Passive signals <b>→</b> Simple actions <b>→</b> Existing artifacts <b>→</b> Manual entry</p>
-        <p className="decision-result"><span>Product decision</span>Inventory maintenance is an <strong>adoption problem</strong>, not only a data-quality problem. Work with <strong>Available / Low / Probably Finished / Unknown</strong> rather than demanding perfect quantities.</p>
+        <p className="case-label">Product decision</p>
+        <h4>The inventory assumption broke</h4>
+        <div className="assumption-flow"><p><span>What I wanted</span>CookBridge always knows what is available.</p><b>→</b><p><span>Reality</span>Exact updates created another chore.</p><b>→</b><p><span>I changed</span>Inventory became a household belief.</p></div>
+        <p className="belief-flow">Available <b>→</b> Low <b>→</b> Probably Finished <b>→</b> Unknown</p>
       </div>
 
       <div className="decision-block">
-        <p className="case-label">Decision 03</p>
-        <h4>A working prototype is not validation</h4>
-        <p>I built an interactive prototype to make the intended experience tangible. The question is no longer “Can this flow work?”</p>
-        <p className="decision-result"><span>What I am testing now</span><strong>Would someone — including me — keep using it across repeated days, when meal history and household context matter?</strong></p>
+        <p className="case-label">Observed in prototype testing</p>
+        <h4>Testing exposed a 45-second problem</h4>
+        <div className="latency-line"><strong>45 sec</strong><p>A cold-start response after inactivity turns a product meant to reduce interruption into a new wait.</p></div>
       </div>
 
-      <div className="case-block metrics-block">
-        <p className="case-label">Test measurements</p>
-        <p className="case-note">These are the measurements I defined for the test, not achieved results.</p>
-        <div className="metric-grid">
-          <div><h4>Meal-decision time</h4><p>Time from decision-session start to final meal confirmation.</p></div>
-          <div><h4>Manual fridge checking</h4><p>Whether the user still needs to physically check the fridge during the decision.</p></div>
+      <div className="decision-block">
+        <p className="case-label">Iteration</p>
+        <h4>What I built → what I learned → what changed</h4>
+        <div className="learning-lines">
+          <p><span>WhatsApp recommendation flow</span><b>Setup was cumbersome</b><em>Web onboarding + WhatsApp continuation</em></p>
+          <p><span>Ingredient-aware recommendations</span><b>Exact inventory asked too much</b><em>Belief-based inventory</em></p>
+          <p><span>Selection as a decision</span><b>Selecting isn’t cooking</b><em>Selected / Rejected / Confirmed states</em></p>
+          <p><span>One recommendation path</span><b>Users start with different knowledge</b><em>Suggest Meals / I Have Ingredients</em></p>
         </div>
       </div>
 
-      <Tags items={["0→1 product", "Interactive prototype", "User-effort trade-off", "Success metrics"]} />
+      <div className="decision-block">
+        <p className="case-label">Product judgment</p>
+        <h4>Key product decisions</h4>
+        <div className="key-decisions"><p><strong>Structured onboarding, lightweight usage</strong> — household setup needs form; meal decisions should stay conversational.</p><p><strong>Selected ≠ Confirmed</strong> — only confirmed meals update history and inventory.</p><p><strong>Two entry modes</strong> — recommendations work whether users know their ingredients or not.</p></div>
+      </div>
+
+      <DeepDive title="Problem, research & validation">
+        <p>10 households were researched. The current self-test measures meal-decision time and whether someone still needs to check the fridge manually.</p>
+      </DeepDive>
+      <DeepDive title="Scope, trade-offs & next validation">
+        <p>A working prototype proves the intended experience can be made tangible, not that it earns repeated use. The next question is whether household context and meal history make it worth returning to over time.</p>
+      </DeepDive>
     </div>
   </article>
 );
@@ -144,22 +163,12 @@ const FashionStylistCaseStudy = () => (
       <span>02</span>
     </div>
     <div className="project-story">
-      <div className="project-meta"><span>Product Builder</span><time>Working prototype</time></div>
+      <div className="project-meta"><span>AI Product Builder</span><time>Working prototype</time></div>
       <h3>AI Fashion Stylist</h3>
-      <p className="project-question">“Full wardrobe, but nothing to wear?”</p>
+      <p className="project-question">Can AI style you without inventing clothes you don’t own?</p>
+      <Tags items={["AI Vision", "Structured Context", "WhatsApp", "Prototype"]} />
 
-      <div className="case-block">
-        <p className="case-label">The question</p>
-        <p><strong>Could AI understand someone’s existing wardrobe well enough to suggest useful outfits without asking them to manually catalogue everything?</strong></p>
-        <p className="case-muted">I started from my own frustration, researched Acloset and Indyx, spoke with the Indyx founder and studied how people organise wardrobes and decide what to wear.</p>
-      </div>
-      <div className="case-block">
-        <p className="case-label">The smallest working flow</p>
-        <p className="principle">Wardrobe photos <b>→</b> item extraction <b>→</b> context / vibe <b>→</b> outfit recommendation <b>→</b> feedback</p>
-      </div>
-
-      <div className="proof-flow" aria-label="AI Fashion Stylist prototype proof points"><div><strong>5</strong><span>wardrobe photos</span></div><b>↓</b><div><strong>18</strong><span>clothing / accessory items detected</span></div><b>↓</b><div><strong>3</strong><span>outfit recommendations using only owned items</span></div></div>
-
+      <div className="demo-intro"><p className="case-label">Working demo</p><p>Wardrobe photos become outfit recommendations using only known items.</p></div>
       <div className="video-wrap">
         <video controls playsInline preload="metadata" poster="/images/ai_fashion_stylist_in_action.png" aria-label="AI Fashion Stylist prototype demo">
           <source src="/videos/ai-fashion-stylist-demo.mp4" type="video/mp4" />
@@ -167,8 +176,19 @@ const FashionStylistCaseStudy = () => (
         </video>
       </div>
 
-      <div className="next-question fashion-learning"><p className="case-label">What changed my thinking</p><p>The prototype showed the technical flow could work, but inference cost became part of the validation question. I stopped adding features and started asking whether the value justified the cost of delivering the experience.</p></div>
-      <Tags items={["Working prototype", "Vision workflow", "Value vs cost"]} />
+      <div className="case-block">
+        <h4 className="story-heading">Photos → extraction → structured wardrobe → reasoning → WhatsApp</h4>
+        <p className="principle">Wardrobe photos <b>→</b> vision extraction <b>→</b> structured wardrobe <b>→</b> outfit reasoning <b>→</b> WhatsApp recommendation</p>
+      </div>
+
+      <div className="decision-block grounding-block">
+        <p className="case-label">AI constraint</p>
+        <h4>The hard part was grounding the AI</h4>
+        <div className="grounding-compare"><p><span>Generic AI stylist</span>User asks for an outfit <b>→</b> attractive recommendations <b>→</b> may not own them</p><p><span>This system</span>Known wardrobe <b>→</b> structured context <b>→</b> combinations from actual items</p></div>
+      </div>
+
+      <div className="decision-block"><p className="case-label">Product / technical judgment</p><h4>Three key decisions</h4><div className="key-decisions"><p><strong>Ground the model first</strong> — extraction precedes generation so recommendations stay tied to owned clothes.</p><p><strong>WhatsApp-first interaction</strong> — accessible without another app to install.</p><p><strong>Structured context over raw images</strong> — extracted wardrobe data creates a cleaner reasoning layer.</p></div></div>
+      <DeepDive title="Research, prototype proof & next question"><p>I researched Acloset and Indyx, spoke with the Indyx founder, and studied how people organise wardrobes and decide what to wear. The prototype showed the flow could work; inference cost became the next validation question.</p></DeepDive>
     </div>
   </article>
 );
@@ -198,10 +218,10 @@ const Portfolio = () => {
 
         <section className="profile section-wrap" id="profile">
           <SectionTitle number="01">Profile</SectionTitle>
-          <div className="profile-copy"><p>I spent <strong>6+ years learning how software gets engineered and shipped.</strong> While building my own products, I became more interested in deciding what should be built and why. My engineering background helps me reason about feasibility, system constraints and implementation cost earlier in the product lifecycle.</p><p>The resume tells you what I shipped. <mark>The case studies below show how I think.</mark></p></div>
+          <div className="profile-copy"><p><strong>Technical Product Manager and AI product builder with an engineering foundation.</strong> I work from problem discovery to prototype, combining product judgment with the technical depth to make ideas executable.</p><p>The resume tells you what I shipped. <mark>The selected work below shows how I think.</mark></p></div>
         </section>
 
-        <section className="journey-section section-wrap" id="case-studies"><SectionTitle number="02">Case studies</SectionTitle><div className="project-showcase"><CookBridgeCaseStudy /><FashionStylistCaseStudy /></div></section>
+        <section className="journey-section section-wrap" id="case-studies"><SectionTitle number="02">Selected work</SectionTitle><div className="project-showcase"><CookBridgeCaseStudy /><FashionStylistCaseStudy /></div></section>
 
         <section className="how-i-work section-wrap"><SectionTitle number="03">How I think</SectionTitle><div className="work-flow">{thinkingPrinciples.map(([title, copy], index) => <article key={title}><span>{String(index + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{copy}</p></article>)}</div></section>
 
