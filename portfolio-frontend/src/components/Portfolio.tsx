@@ -161,7 +161,7 @@ const FashionStylistCaseStudy = () => (
       <div className="proof-flow" aria-label="AI Fashion Stylist prototype proof points"><div><strong>5</strong><span>wardrobe photos</span></div><b>↓</b><div><strong>18</strong><span>clothing / accessory items detected</span></div><b>↓</b><div><strong>3</strong><span>outfit recommendations using only owned items</span></div></div>
 
       <div className="video-wrap">
-        <video controls playsInline preload="metadata" poster="/images/ai-fashion-stylist-project.jpg" aria-label="AI Fashion Stylist prototype demo">
+        <video controls playsInline preload="metadata" poster="/images/ai_fashion_stylist_in_action.png" aria-label="AI Fashion Stylist prototype demo">
           <source src="/videos/ai-fashion-stylist-demo.mp4" type="video/mp4" />
           Your browser does not support the embedded AI Fashion Stylist demo video.
         </video>
