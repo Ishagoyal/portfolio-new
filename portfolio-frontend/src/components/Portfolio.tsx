@@ -1,14 +1,7 @@
 import { ArrowDown, ArrowUp, ArrowUpRight, Download, MapPin, Moon, Play, Sun, X } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 const links = { email: "mailto:iamishagoyal@gmail.com", linkedin: "https://www.linkedin.com/in/isha-goyal-34b419b7", github: "https://github.com/Ishagoyal", resume: "/Isha Resume.pdf" };
-type EngineeringStep = { role: string; period: string; focus: string; description: string; tags: string[] };
-
-const engineeringJourney: EngineeringStep[] = [
-  { role: "Production ownership", period: "Alpha Nodus", focus: "From interface to operating product", description: "Ownership expanded from frontend into APIs, integrations, infrastructure and AWS deployment for the Greeter/Kiosk healthcare product. It made the operational constraints behind a product decision impossible to ignore.", tags: ["APIs & integrations", "AWS deployment", "Product delivery"] },
-  { role: "Architecture leverage", period: "Playment / TELUS", focus: "Shared foundations make teams faster", description: "Consolidated five frontend repositories into one monorepo and helped build shared product foundations, including the Pixel React component library. The work sharpened how I think about leverage, consistency and implementation cost.", tags: ["Monorepo", "Design systems", "Technical strategy"] },
-  { role: "Complex technical products", period: "Engineering foundation", focus: "Making complicated systems usable", description: "Worked on data-heavy annotation interfaces as well as Web3/Starknet workflows, wallets, NFTs and transactions. Those experiences taught me to surface the right complexity to users while giving engineers unambiguous product intent.", tags: ["Complex workflows", "System design", "User clarity"] },
-];
 
 const SectionTitle = ({ number, children }: { number: string; children: React.ReactNode }) => <div className="section-title"><span>{number}</span><h2>{children}</h2></div>;
 const Tags = ({ items }: { items: string[] }) => <div className="project-tags">{items.map((item) => <span key={item}>{item}</span>)}</div>;
@@ -38,13 +31,15 @@ const FashionPanel = ({ onWatchDemo }: { onWatchDemo: (opener: HTMLElement) => v
   </div>
 </section>;
 
-const VideoModal = ({ onClose }: { onClose: () => void }) => {
+const VideoModal = ({ onClose, scrollY }: { onClose: () => void; scrollY: number }) => {
   const dialogRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const initialScroll = window.scrollY;
+  useLayoutEffect(() => {
     const bodyStyle = document.body.style;
-    const previous = { overflow: bodyStyle.overflow, position: bodyStyle.position, top: bodyStyle.top, right: bodyStyle.right, left: bodyStyle.left, width: bodyStyle.width };
-    bodyStyle.overflow = "hidden"; bodyStyle.position = "fixed"; bodyStyle.top = `-${initialScroll}px`; bodyStyle.right = "0"; bodyStyle.left = "0"; bodyStyle.width = "100%";
+    const previous = { position: bodyStyle.position, top: bodyStyle.top, right: bodyStyle.right, left: bodyStyle.left, width: bodyStyle.width, paddingRight: bodyStyle.paddingRight };
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    const computedPaddingRight = window.getComputedStyle(document.body).paddingRight;
+    bodyStyle.position = "fixed"; bodyStyle.top = `-${scrollY}px`; bodyStyle.left = "0"; bodyStyle.right = "0"; bodyStyle.width = "100%";
+    if (scrollbarWidth > 0) bodyStyle.paddingRight = `calc(${computedPaddingRight} + ${scrollbarWidth}px)`;
     const focusable = () => Array.from(dialogRef.current?.querySelectorAll<HTMLElement>('button, video, [href], [tabindex]:not([tabindex="-1"])') ?? []).filter((element) => !element.hasAttribute("disabled"));
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
@@ -52,12 +47,10 @@ const VideoModal = ({ onClose }: { onClose: () => void }) => {
     };
     window.addEventListener("keydown", onKeyDown);
     dialogRef.current?.querySelector<HTMLElement>("button")?.focus({ preventScroll: true });
-    return () => { window.removeEventListener("keydown", onKeyDown); bodyStyle.overflow = previous.overflow; bodyStyle.position = previous.position; bodyStyle.top = previous.top; bodyStyle.right = previous.right; bodyStyle.left = previous.left; bodyStyle.width = previous.width; window.scrollTo(0, initialScroll); };
-  }, [onClose]);
+    return () => { window.removeEventListener("keydown", onKeyDown); bodyStyle.position = previous.position; bodyStyle.top = previous.top; bodyStyle.right = previous.right; bodyStyle.left = previous.left; bodyStyle.width = previous.width; bodyStyle.paddingRight = previous.paddingRight; window.scrollTo({ top: scrollY, left: 0, behavior: "auto" }); };
+  }, [onClose, scrollY]);
   return <div className="video-modal" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}><div className="video-modal__dialog" ref={dialogRef} role="dialog" aria-modal="true" aria-label="AI Fashion Stylist working demo"><button className="video-modal__close" type="button" onClick={onClose} aria-label="Close working demo"><X size={18} /></button><video controls playsInline preload="metadata" poster="/images/ai_fashion_stylist_in_action.png"><source src="/videos/ai-fashion-stylist-demo.mp4" type="video/mp4" />Your browser does not support this video.</video></div></div>;
 };
-
-const EngineeringJourneyStep = ({ item, index }: { item: EngineeringStep; index: number }) => <article className={`engineering-step${index % 2 ? " engineering-step--right" : ""}`}><div className="engineering-content"><p className="engineering-period">{item.period}</p><h3>{item.role}</h3><p className="engineering-focus">{item.focus}</p><p className="engineering-description">{item.description}</p><div className="engineering-tags">{item.tags.map((tag) => <span key={tag}>{tag}</span>)}</div></div><span className="engineering-marker" aria-hidden="true" /></article>;
 
 const Portfolio = () => {
   const [dark, setDark] = useState(false);
@@ -65,8 +58,9 @@ const Portfolio = () => {
   const [fashionOpen, setFashionOpen] = useState(false);
   const [demoOpen, setDemoOpen] = useState(false);
   const demoOpenerRef = useRef<HTMLElement | null>(null);
+  const demoScrollYRef = useRef(0);
 
-  const openDemo = (opener: HTMLElement) => { demoOpenerRef.current = opener; setDemoOpen(true); };
+  const openDemo = (opener: HTMLElement) => { const scrollY = window.scrollY; demoScrollYRef.current = scrollY; demoOpenerRef.current = opener; setDemoOpen(true); };
   const closeDemo = () => { setDemoOpen(false); requestAnimationFrame(() => demoOpenerRef.current?.focus({ preventScroll: true })); };
 
   return <div className={`site-shell${dark ? " dark" : ""}`}>
@@ -80,11 +74,15 @@ const Portfolio = () => {
         <article className={`project-feature project-teaser project-teaser--fashion${fashionOpen ? " project-teaser--expanded" : ""}`}><button className="project-visual project-visual--playable" type="button" onClick={(event) => openDemo(event.currentTarget)} aria-label="Watch AI Fashion Stylist working demo"><img src="/images/ai-fashion-stylist-project.jpg" alt="Personal wardrobe with three digital outfit suggestions" /><span>02</span><span className="play-affordance"><Play size={16} fill="currentColor" /> Watch demo</span></button><div className="project-story"><p className="project-meta"><span>Selected work</span><span>02</span></p><h3>AI Fashion Stylist</h3><p className="project-question">An AI stylist grounded in clothes you actually own.</p><p className="project-proof">Wardrobe photos → structured context → outfit recommendations</p><Tags items={["AI Vision", "Structured Context", "WhatsApp", "Prototype"]} /><div className="project-actions"><button className="project-link watch-demo-link" type="button" onClick={(event) => openDemo(event.currentTarget)}><Play size={14} fill="currentColor" /> Watch demo</button><CaseStudyButton active={fashionOpen} controls="fashion-case-study" onClick={() => setFashionOpen((open) => !open)} /></div></div></article>
         {fashionOpen && <FashionPanel onWatchDemo={openDemo} />}
       </div></section>
-      <section className="journey-section engineering section-wrap"><SectionTitle number="03">Engineering foundation</SectionTitle><div className="engineering-intro">Why my engineering background makes me a better technical product person.</div><div className="engineering-timeline">{engineeringJourney.map((item, index) => <EngineeringJourneyStep key={item.role} item={item} index={index} />)}</div></section>
+      <section className="journey-section engineering section-wrap"><SectionTitle number="03">Engineering foundation</SectionTitle><div className="engineering-intro">What six years of building software changed about how I make product decisions.</div><div className="engineering-themes">
+        <article className="engineering-theme"><p className="engineering-theme__number">01</p><div className="engineering-theme__content"><h3>I think beyond the interface</h3><p className="engineering-theme__evidence">Frontend <b>→</b> APIs <b>→</b> integrations <b>→</b> infrastructure <b>→</b> production</p><p className="engineering-theme__copy">I’ve worked beyond UI implementation into APIs, integrations, deployment, and production ownership.</p><p className="engineering-theme__implication"><span>In product</span>I can see where a seemingly simple decision creates technical constraints, operational cost, or implementation risk.</p></div></article>
+        <article className="engineering-theme engineering-theme--offset"><p className="engineering-theme__number">02</p><div className="engineering-theme__content"><h3>I look for leverage, not just the next feature</h3><div className="engineering-theme__metric"><strong>5 <b>→</b> 1</strong><span>frontend repositories consolidated into a shared foundation</span></div><p className="engineering-theme__copy">Over time I moved from shipping individual features to thinking about reusable systems, shared components, architecture, and reducing duplicated engineering effort.</p><p className="engineering-theme__implication"><span>In product</span>I naturally ask whether something should be solved once, repeatedly, or not built at all.</p></div></article>
+        <article className="engineering-theme"><p className="engineering-theme__number">03</p><div className="engineering-theme__content"><h3>I make technical complexity usable</h3><p className="engineering-theme__evidence engineering-theme__evidence--statement">Complex systems <b>→</b> clear user experience</p><p className="engineering-theme__domains">data-heavy workflows <b>·</b> healthcare <b>·</b> Web3 <b>·</b> analytics</p><p className="engineering-theme__copy">I’ve worked on complex workflows across annotation tools, healthcare products, wallets, NFTs, blockchain transactions, and data-heavy interfaces.</p><p className="engineering-theme__implication"><span>In product</span>I’m comfortable going deep with engineers, while exposing only the complexity the user actually needs.</p></div></article>
+      </div><p className="engineering-closing">That engineering depth is now the foundation I use to define clearer scope, make better trade-offs, and work credibly with engineering teams.</p></section>
       <section className="skills section-wrap" id="skills"><SectionTitle number="04">Skills</SectionTitle><div className="skill-grid"><div><h3>Product</h3><div className="skill-tags"><span>Product Discovery</span><span>User Research</span><span>MVP Scoping</span><span>Product Requirements</span><span>Success Metrics</span><span>0→1 Products</span></div></div><div><h3>AI & Engineering</h3><div className="skill-tags"><span>LLM Product Design</span><span>AI / Vision Workflows</span><span>APIs & Integrations</span><span>System Design</span><span>React / TypeScript</span><span>Node.js</span><span>AWS</span></div></div></div></section>
     </main>
     <footer><div><p>Have an interesting problem?</p><a href={links.email}>Let’s talk.<ArrowUpRight /></a></div><div className="footer-meta"><span><MapPin size={15} /> Bengaluru, India</span><span>© {new Date().getFullYear()} Isha Goyal</span></div></footer>
-    {demoOpen && <VideoModal onClose={closeDemo} />}
+    {demoOpen && <VideoModal onClose={closeDemo} scrollY={demoScrollYRef.current} />}
   </div>;
 };
 
