@@ -2,6 +2,7 @@ import { ArrowDown, ArrowUp, ArrowUpRight, Download, MapPin, Moon, Play, Sun, X 
 import { useLayoutEffect, useRef, useState } from "react";
 
 const links = { email: "mailto:iamishagoyal@gmail.com", linkedin: "https://www.linkedin.com/in/isha-goyal-34b419b7", github: "https://github.com/Ishagoyal", resume: "/Isha Resume.pdf" };
+type BodyLockState = { scrollY: number; position: string; top: string; right: string; left: string; width: string; paddingRight: string };
 
 const SectionTitle = ({ number, children }: { number: string; children: React.ReactNode }) => <div className="section-title"><span>{number}</span><h2>{children}</h2></div>;
 const Tags = ({ items }: { items: string[] }) => <div className="project-tags">{items.map((item) => <span key={item}>{item}</span>)}</div>;
@@ -14,7 +15,7 @@ const CookBridgePanel = () => <section id="cookbridge-case-study" className="inl
   <div className="case-moments">
     <section className="case-moment"><p className="case-label">Early evidence</p><div className="evidence-row"><div><strong>7/10</strong><span>households experienced the problem</span></div></div><p className="case-copy">Household conversations showed that meal decisions still require remembering preferences, recent meals and what may be available—before anyone can begin cooking.</p></section>
     <section className="case-moment"><p className="case-label">Why it is hard</p><h5>A meal decision needs more than a recipe.</h5><div className="context-decision-flow" aria-label="Diet, preferences, recent meals and available ingredients inform a meal decision"><span>Diet</span><span>Preferences</span><span>Recent meals</span><span>Available ingredients</span><b>→</b><strong>Meal decision</strong></div></section>
-    <section className="case-moment case-moment--highlight"><p className="case-label">A failed assumption</p><h5>The inventory assumption broke.</h5><div className="assumption-flow"><p><span>Initial assumption</span>CookBridge can maintain accurate inventory.</p><b>→</b><p><span>Observed problem</span>Exact updates created another household chore.</p><b>→</b><p><span>Product decision</span>Inventory becomes a household belief.</p></div><p className="belief-flow">Available <b>→</b> Low <b>→</b> Probably Finished <b>→</b> Unknown</p></section>
+    <section className="case-moment case-moment--highlight"><div className="case-moment__highlight-content"><p className="case-label">A failed assumption</p><h5>The inventory assumption broke.</h5><div className="assumption-flow"><p><span>Initial assumption</span>CookBridge can maintain accurate inventory.</p><b>→</b><p><span>Observed problem</span>Exact updates created another household chore.</p><b>→</b><p><span>Product decision</span>Inventory becomes a household belief.</p></div><p className="belief-flow">Available <b>→</b> Low <b>→</b> Probably Finished <b>→</b> Unknown</p></div></section>
     <section className="case-moment"><p className="case-label">What changed / current direction</p><h5>Testing changed the product, not just the interface.</h5><div className="learning-lines"><article><p className="learning-lines__start">WhatsApp-only flow</p><p className="learning-lines__observation">Setup was cumbersome</p><p className="learning-lines__decision">Web onboarding + WhatsApp usage</p></article><article><p className="learning-lines__start">Exact inventory</p><p className="learning-lines__observation">Too much maintenance effort</p><p className="learning-lines__decision">Belief-based inventory</p></article><article><p className="learning-lines__start">Selection treated as final</p><p className="learning-lines__observation">Selecting isn’t cooking</p><p className="learning-lines__decision">Selected / Rejected / Confirmed</p></article><article><p className="learning-lines__start">One recommendation path</p><p className="learning-lines__observation">People start with different knowledge</p><p className="learning-lines__decision">Suggest Meals / I Have Ingredients</p></article></div><p className="case-copy"><strong>Only Confirmed</strong> updates meal history and inventory.</p></section>
     <div className="case-deep-dives"><DeepDive title="Research"><p>10 household conversations informed the work. The current self-test measures meal-decision time and whether someone still needs to check the fridge manually.</p></DeepDive><DeepDive title="Scope & trade-offs"><p>A working prototype makes the intended experience tangible; it does not prove repeated use. The next question is whether household context and meal history earn a return visit over time.</p></DeepDive><DeepDive title="What I would validate next"><p>Success metrics, instrumentation, technical risks and implementation detail belong here—not in the recruiter-facing path.</p></DeepDive></div>
   </div>
@@ -31,15 +32,9 @@ const FashionPanel = ({ onWatchDemo }: { onWatchDemo: (opener: HTMLElement) => v
   </div>
 </section>;
 
-const VideoModal = ({ onClose, scrollY }: { onClose: () => void; scrollY: number }) => {
+const VideoModal = ({ onClose }: { onClose: () => void }) => {
   const dialogRef = useRef<HTMLDivElement>(null);
   useLayoutEffect(() => {
-    const bodyStyle = document.body.style;
-    const previous = { position: bodyStyle.position, top: bodyStyle.top, right: bodyStyle.right, left: bodyStyle.left, width: bodyStyle.width, paddingRight: bodyStyle.paddingRight };
-    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-    const computedPaddingRight = window.getComputedStyle(document.body).paddingRight;
-    bodyStyle.position = "fixed"; bodyStyle.top = `-${scrollY}px`; bodyStyle.left = "0"; bodyStyle.right = "0"; bodyStyle.width = "100%";
-    if (scrollbarWidth > 0) bodyStyle.paddingRight = `calc(${computedPaddingRight} + ${scrollbarWidth}px)`;
     const focusable = () => Array.from(dialogRef.current?.querySelectorAll<HTMLElement>('button, video, [href], [tabindex]:not([tabindex="-1"])') ?? []).filter((element) => !element.hasAttribute("disabled"));
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
@@ -47,8 +42,8 @@ const VideoModal = ({ onClose, scrollY }: { onClose: () => void; scrollY: number
     };
     window.addEventListener("keydown", onKeyDown);
     dialogRef.current?.querySelector<HTMLElement>("button")?.focus({ preventScroll: true });
-    return () => { window.removeEventListener("keydown", onKeyDown); bodyStyle.position = previous.position; bodyStyle.top = previous.top; bodyStyle.right = previous.right; bodyStyle.left = previous.left; bodyStyle.width = previous.width; bodyStyle.paddingRight = previous.paddingRight; window.scrollTo({ top: scrollY, left: 0, behavior: "auto" }); };
-  }, [onClose, scrollY]);
+    return () => { window.removeEventListener("keydown", onKeyDown); };
+  }, [onClose]);
   return <div className="video-modal" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}><div className="video-modal__dialog" ref={dialogRef} role="dialog" aria-modal="true" aria-label="AI Fashion Stylist working demo"><button className="video-modal__close" type="button" onClick={onClose} aria-label="Close working demo"><X size={18} /></button><video controls playsInline preload="metadata" poster="/images/ai_fashion_stylist_in_action.png"><source src="/videos/ai-fashion-stylist-demo.mp4" type="video/mp4" />Your browser does not support this video.</video></div></div>;
 };
 
@@ -58,10 +53,30 @@ const Portfolio = () => {
   const [fashionOpen, setFashionOpen] = useState(false);
   const [demoOpen, setDemoOpen] = useState(false);
   const demoOpenerRef = useRef<HTMLElement | null>(null);
-  const demoScrollYRef = useRef(0);
+  const bodyLockRef = useRef<BodyLockState | null>(null);
 
-  const openDemo = (opener: HTMLElement) => { const scrollY = window.scrollY; demoScrollYRef.current = scrollY; demoOpenerRef.current = opener; setDemoOpen(true); };
-  const closeDemo = () => { setDemoOpen(false); requestAnimationFrame(() => demoOpenerRef.current?.focus({ preventScroll: true })); };
+  const openDemo = (opener: HTMLElement) => {
+    const scrollY = window.scrollY;
+    const bodyStyle = document.body.style;
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    const computedPaddingRight = window.getComputedStyle(document.body).paddingRight;
+    bodyLockRef.current = { scrollY, position: bodyStyle.position, top: bodyStyle.top, right: bodyStyle.right, left: bodyStyle.left, width: bodyStyle.width, paddingRight: bodyStyle.paddingRight };
+    bodyStyle.position = "fixed"; bodyStyle.top = `-${scrollY}px`; bodyStyle.left = "0"; bodyStyle.right = "0"; bodyStyle.width = "100%";
+    if (scrollbarWidth > 0) bodyStyle.paddingRight = `calc(${computedPaddingRight} + ${scrollbarWidth}px)`;
+    demoOpenerRef.current = opener;
+    setDemoOpen(true);
+  };
+  const closeDemo = () => {
+    const lock = bodyLockRef.current;
+    if (lock) {
+      const bodyStyle = document.body.style;
+      bodyStyle.position = lock.position; bodyStyle.top = lock.top; bodyStyle.right = lock.right; bodyStyle.left = lock.left; bodyStyle.width = lock.width; bodyStyle.paddingRight = lock.paddingRight;
+      window.scrollTo({ top: lock.scrollY, left: 0, behavior: "auto" });
+      bodyLockRef.current = null;
+    }
+    setDemoOpen(false);
+    requestAnimationFrame(() => demoOpenerRef.current?.focus({ preventScroll: true }));
+  };
 
   return <div className={`site-shell${dark ? " dark" : ""}`}>
     <header className="topbar"><a className="monogram" href="#top" aria-label="Back to top">IG<span>.</span></a><div className="header-actions"><button className="theme-toggle" onClick={() => setDark(!dark)} aria-label={dark ? "Use light theme" : "Use dark theme"}>{dark ? <Sun size={17} /> : <Moon size={17} />}</button><a className="download-button" href={links.resume} target="_blank" rel="noreferrer"><Download size={16} /> Download PDF</a></div></header>
@@ -74,15 +89,15 @@ const Portfolio = () => {
         <article className={`project-feature project-teaser project-teaser--fashion${fashionOpen ? " project-teaser--expanded" : ""}`}><button className="project-visual project-visual--playable" type="button" onClick={(event) => openDemo(event.currentTarget)} aria-label="Watch AI Fashion Stylist working demo"><img src="/images/ai-fashion-stylist-project.jpg" alt="Personal wardrobe with three digital outfit suggestions" /><span>02</span><span className="play-affordance"><Play size={16} fill="currentColor" /> Watch demo</span></button><div className="project-story"><p className="project-meta"><span>Selected work</span><span>02</span></p><h3>AI Fashion Stylist</h3><p className="project-question">An AI stylist grounded in clothes you actually own.</p><p className="project-proof">Wardrobe photos → structured context → outfit recommendations</p><Tags items={["AI Vision", "Structured Context", "WhatsApp", "Prototype"]} /><div className="project-actions"><button className="project-link watch-demo-link" type="button" onClick={(event) => openDemo(event.currentTarget)}><Play size={14} fill="currentColor" /> Watch demo</button><CaseStudyButton active={fashionOpen} controls="fashion-case-study" onClick={() => setFashionOpen((open) => !open)} /></div></div></article>
         {fashionOpen && <FashionPanel onWatchDemo={openDemo} />}
       </div></section>
-      <section className="journey-section engineering section-wrap"><SectionTitle number="03">Engineering foundation</SectionTitle><div className="engineering-intro">What six years of building software changed about how I make product decisions.</div><div className="engineering-themes">
-        <article className="engineering-theme"><p className="engineering-theme__number">01</p><div className="engineering-theme__content"><h3>I think beyond the interface</h3><p className="engineering-theme__evidence">Frontend <b>→</b> APIs <b>→</b> integrations <b>→</b> infrastructure <b>→</b> production</p><p className="engineering-theme__copy">I’ve worked beyond UI implementation into APIs, integrations, deployment, and production ownership.</p><p className="engineering-theme__implication"><span>In product</span>I can see where a seemingly simple decision creates technical constraints, operational cost, or implementation risk.</p></div></article>
-        <article className="engineering-theme engineering-theme--offset"><p className="engineering-theme__number">02</p><div className="engineering-theme__content"><h3>I look for leverage, not just the next feature</h3><div className="engineering-theme__metric"><strong>5 <b>→</b> 1</strong><span>frontend repositories consolidated into a shared foundation</span></div><p className="engineering-theme__copy">Over time I moved from shipping individual features to thinking about reusable systems, shared components, architecture, and reducing duplicated engineering effort.</p><p className="engineering-theme__implication"><span>In product</span>I naturally ask whether something should be solved once, repeatedly, or not built at all.</p></div></article>
-        <article className="engineering-theme"><p className="engineering-theme__number">03</p><div className="engineering-theme__content"><h3>I make technical complexity usable</h3><p className="engineering-theme__evidence engineering-theme__evidence--statement">Complex systems <b>→</b> clear user experience</p><p className="engineering-theme__domains">data-heavy workflows <b>·</b> healthcare <b>·</b> Web3 <b>·</b> analytics</p><p className="engineering-theme__copy">I’ve worked on complex workflows across annotation tools, healthcare products, wallets, NFTs, blockchain transactions, and data-heavy interfaces.</p><p className="engineering-theme__implication"><span>In product</span>I’m comfortable going deep with engineers, while exposing only the complexity the user actually needs.</p></div></article>
+      <section className="journey-section engineering section-wrap"><SectionTitle number="03">Engineering foundation</SectionTitle><div className="engineering-intro">What six years of building software changed about how I make product decisions.</div><div className="engineering-timeline">
+        <article className="engineering-step"><div className="engineering-content"><h3>I think beyond the interface</h3><p className="engineering-theme__evidence">Frontend <b>→</b> APIs <b>→</b> integrations <b>→</b> infrastructure <b>→</b> production</p><p className="engineering-theme__copy">I’ve worked beyond UI implementation into APIs, integrations, deployment, and production ownership.</p><p className="engineering-theme__implication"><span>In product</span>I can see where a seemingly simple decision creates technical constraints, operational cost, or implementation risk.</p></div><span className="engineering-marker" aria-label="Theme 01">01</span></article>
+        <article className="engineering-step engineering-step--right"><div className="engineering-content"><h3>I look for leverage, not just the next feature</h3><div className="engineering-theme__metric"><strong>5 <b>→</b> 1</strong><span>frontend repositories consolidated into a shared foundation</span></div><p className="engineering-theme__copy">Over time I moved from shipping individual features to thinking about reusable systems, shared components, architecture, and reducing duplicated engineering effort.</p><p className="engineering-theme__implication"><span>In product</span>I naturally ask whether something should be solved once, repeatedly, or not built at all.</p></div><span className="engineering-marker" aria-label="Theme 02">02</span></article>
+        <article className="engineering-step"><div className="engineering-content"><h3>I make technical complexity usable</h3><p className="engineering-theme__evidence engineering-theme__evidence--statement">Complex systems <b>→</b> clear user experience</p><p className="engineering-theme__domains">data-heavy workflows <b>·</b> healthcare <b>·</b> Web3 <b>·</b> analytics</p><p className="engineering-theme__copy">I’ve worked on complex workflows across annotation tools, healthcare products, wallets, NFTs, blockchain transactions, and data-heavy interfaces.</p><p className="engineering-theme__implication"><span>In product</span>I’m comfortable going deep with engineers, while exposing only the complexity the user actually needs.</p></div><span className="engineering-marker" aria-label="Theme 03">03</span></article>
       </div><p className="engineering-closing">That engineering depth is now the foundation I use to define clearer scope, make better trade-offs, and work credibly with engineering teams.</p></section>
       <section className="skills section-wrap" id="skills"><SectionTitle number="04">Skills</SectionTitle><div className="skill-grid"><div><h3>Product</h3><div className="skill-tags"><span>Product Discovery</span><span>User Research</span><span>MVP Scoping</span><span>Product Requirements</span><span>Success Metrics</span><span>0→1 Products</span></div></div><div><h3>AI & Engineering</h3><div className="skill-tags"><span>LLM Product Design</span><span>AI / Vision Workflows</span><span>APIs & Integrations</span><span>System Design</span><span>React / TypeScript</span><span>Node.js</span><span>AWS</span></div></div></div></section>
     </main>
     <footer><div><p>Have an interesting problem?</p><a href={links.email}>Let’s talk.<ArrowUpRight /></a></div><div className="footer-meta"><span><MapPin size={15} /> Bengaluru, India</span><span>© {new Date().getFullYear()} Isha Goyal</span></div></footer>
-    {demoOpen && <VideoModal onClose={closeDemo} scrollY={demoScrollYRef.current} />}
+    {demoOpen && <VideoModal onClose={closeDemo} />}
   </div>;
 };
 

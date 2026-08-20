@@ -88,7 +88,8 @@ mark { color: var(--blue); background: none; }
 .case-moment:last-of-type { border-bottom: 1px solid var(--line); }
 .case-moment h5 { max-width: 650px; margin: 14px 0 0; font: 500 clamp(30px, 3.3vw, 48px)/1.06 "Playfair Display", serif; letter-spacing: -.05em; }
 .case-moment .evidence-row { max-width: 270px; grid-template-columns: 1fr; }
-.case-moment--highlight { margin: 0 -42px; padding: 68px 42px 64px; background: color-mix(in srgb, var(--paper) 96%, var(--blue) 3.5%); }
+.case-moment--highlight { margin: 0 -42px; padding: 68px 0 64px; background: color-mix(in srgb, var(--paper) 96%, var(--blue) 3.5%); }
+.case-moment__highlight-content { padding: 0 42px; }
 .case-moment--highlight h5 { margin-top: 22px; }
 .case-copy { max-width: 520px; margin: 17px 0 0; color: color-mix(in srgb, var(--ink) 78%, transparent); font-size: 14px; line-height: 1.7; }
 .watch-demo { display: inline-flex; align-items: center; gap: 9px; margin-top: 23px; padding: 0 0 6px; border: 0; border-bottom: 1px solid var(--blue); background: transparent; color: var(--blue); cursor: pointer; font: 700 12px "Manrope", sans-serif; }
@@ -252,22 +253,31 @@ mark { color: var(--blue); background: none; }
 .earlier-experience a:hover { color: var(--blue); }
 .earlier-experience p { margin: 7px 0 0; font-size: 13px; line-height: 1.6; color: #555c69; }
 
-.engineering-themes { margin-left: 16%; border-top: 1px solid var(--line); }
-.engineering-theme { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 34px; max-width: 860px; padding: 48px 0 54px; border-bottom: 1px solid var(--line); }
-.engineering-theme--offset { margin-left: 12%; }
-.engineering-theme__number { margin: 5px 0 0; color: var(--blue); font: 500 10px "DM Mono", monospace; letter-spacing: .12em; }
-.engineering-theme__content { max-width: 690px; }
-.engineering-theme h3 { margin: 0; font: 500 clamp(30px, 3.1vw, 47px)/1.06 "Playfair Display", serif; letter-spacing: -.045em; }
+.engineering-timeline { position: relative; padding: 0 0 8px; }
+.engineering-timeline::before { content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 1px; background: var(--line); }
+.engineering-step { position: relative; width: 50%; padding: 0 72px 82px 0; text-align: right; }
+.engineering-step--right { margin-left: 50%; padding: 0 0 82px 72px; text-align: left; }
+.engineering-step:last-child { padding-bottom: 12px; }
+.engineering-content { max-width: 470px; margin-left: auto; }
+.engineering-step--right .engineering-content { margin-left: 0; }
+.engineering-step h3 { margin: 0; font: 500 clamp(31px, 3.1vw, 48px)/1.05 "Playfair Display", serif; letter-spacing: -.045em; }
+.engineering-marker { position: absolute; top: 3px; right: -19px; z-index: 1; display: grid; width: 38px; height: 38px; place-items: center; border: 3px solid var(--paper); border-radius: 50%; background: var(--blue); color: var(--paper); font: 500 9px "DM Mono", monospace; letter-spacing: .04em; }
+.engineering-step--right .engineering-marker { right: auto; left: -19px; }
 .engineering-theme__evidence { display: flex; flex-wrap: wrap; align-items: center; gap: 5px 9px; margin: 25px 0 0; color: var(--blue); font: 500 clamp(13px, 1.4vw, 17px)/1.6 "DM Mono", monospace; letter-spacing: .025em; text-transform: uppercase; }
+.engineering-step:not(.engineering-step--right) .engineering-theme__evidence { justify-content: flex-end; }
 .engineering-theme__evidence b, .engineering-theme__domains b { font: 400 18px "DM Mono", monospace; }
 .engineering-theme__evidence--statement { font-family: "Playfair Display", serif; font-size: clamp(22px, 2.4vw, 32px); letter-spacing: -.035em; text-transform: none; }
 .engineering-theme__metric { display: grid; grid-template-columns: auto minmax(0, 260px); align-items: end; gap: 22px; margin-top: 24px; color: var(--blue); }
+.engineering-step:not(.engineering-step--right) .engineering-theme__metric { justify-content: end; }
 .engineering-theme__metric strong { font: 500 clamp(67px, 8vw, 105px)/.8 "Playfair Display", serif; letter-spacing: -.07em; white-space: nowrap; }
 .engineering-theme__metric strong b { font: 400 .65em "DM Mono", monospace; vertical-align: .08em; }
 .engineering-theme__metric span { padding-bottom: 6px; font: 500 10px/1.55 "DM Mono", monospace; letter-spacing: .075em; text-transform: uppercase; }
 .engineering-theme__domains { margin: 16px 0 0; color: color-mix(in srgb, var(--ink) 64%, transparent); font: 500 10px/1.6 "DM Mono", monospace; letter-spacing: .07em; text-transform: uppercase; }
+.engineering-step:not(.engineering-step--right) .engineering-theme__domains { text-align: right; }
 .engineering-theme__copy { max-width: 590px; margin: 21px 0 0; color: color-mix(in srgb, var(--ink) 76%, transparent); font-size: 14px; line-height: 1.72; }
+.engineering-step:not(.engineering-step--right) .engineering-theme__copy { margin-left: auto; }
 .engineering-theme__implication { max-width: 610px; margin: 24px 0 0; padding-left: 17px; border-left: 2px solid var(--blue); font: 500 17px/1.48 "Playfair Display", serif; letter-spacing: -.015em; }
+.engineering-step:not(.engineering-step--right) .engineering-theme__implication { margin-left: auto; padding: 0 17px 0 0; border: 0; border-right: 2px solid var(--blue); }
 .engineering-theme__implication span { display: block; margin-bottom: 5px; color: var(--blue); font: 500 9px "DM Mono", monospace; letter-spacing: .12em; text-transform: uppercase; }
 .engineering-closing { max-width: 620px; margin: 54px 0 0 16%; color: color-mix(in srgb, var(--ink) 75%, transparent); font: 500 18px/1.5 "Playfair Display", serif; letter-spacing: -.02em; }
 .skill-tags span { display: inline-flex; align-items: center; padding: 7px 12px; border: 1px solid var(--line); border-radius: 99px; font: 400 10px "DM Mono", monospace; }
@@ -312,7 +322,8 @@ footer > div:first-child svg { width: .6em; height: .6em; transition: transform 
   .inline-case-study__intro p { grid-column: 1; }
   .case-moments { margin-left: 0; }
   .case-moment { padding: 37px 0; }
-  .case-moment--highlight { margin: 0 -28px; padding: 52px 28px 49px; }
+  .case-moment--highlight { margin: 0 -28px; padding: 52px 0 49px; }
+  .case-moment__highlight-content { padding: 0 28px; }
   .video-modal { padding: 20px; }
   .video-modal__dialog { width: min(100%, 360px); }
   .case-study-page { padding: 25px 20px 85px; }
@@ -349,14 +360,21 @@ footer > div:first-child svg { width: .6em; height: .6em; transition: transform 
   .work-flow article { min-height: 0; padding: 23px 20px; }
   .work-flow h3 { margin-top: 23px; }
   .engineering-intro { margin: -29px 0 54px; }
-  .engineering-themes { margin-left: 0; }
-  .engineering-theme, .engineering-theme--offset { grid-template-columns: 46px minmax(0, 1fr); gap: 14px; margin-left: 0; padding: 39px 0 43px; }
-  .engineering-theme__number { margin-top: 4px; }
+  .engineering-timeline::before { left: 19px; }
+  .engineering-step, .engineering-step--right { width: 100%; min-height: 0; margin-left: 0; padding: 0 0 65px 58px; text-align: left; }
+  .engineering-step:last-child { padding-bottom: 8px; }
+  .engineering-content, .engineering-step--right .engineering-content { margin-left: 0; }
+  .engineering-marker, .engineering-step--right .engineering-marker { top: 0; left: 0; right: auto; width: 38px; height: 38px; }
   .engineering-theme__evidence { gap: 4px 7px; font-size: 11px; }
+  .engineering-step:not(.engineering-step--right) .engineering-theme__evidence { justify-content: flex-start; }
   .engineering-theme__metric { grid-template-columns: 1fr; gap: 14px; }
+  .engineering-step:not(.engineering-step--right) .engineering-theme__metric { justify-content: start; }
   .engineering-theme__metric span { max-width: 230px; padding: 0; }
+  .engineering-step:not(.engineering-step--right) .engineering-theme__domains { text-align: left; }
   .engineering-theme__copy { margin-top: 19px; font-size: 13px; }
+  .engineering-step:not(.engineering-step--right) .engineering-theme__copy { margin-left: 0; }
   .engineering-theme__implication { margin-top: 21px; font-size: 16px; }
+  .engineering-step:not(.engineering-step--right) .engineering-theme__implication { margin-left: 0; padding: 0 0 0 17px; border: 0; border-left: 2px solid var(--blue); }
   .engineering-closing { margin: 42px 0 0; font-size: 17px; }
   .skill-grid { gap: 18px; }
   .skill-grid > div { padding: 26px 20px; }
