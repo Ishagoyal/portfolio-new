@@ -15,7 +15,7 @@ const links = {
   email: "mailto:iamishagoyal@gmail.com",
   linkedin: "https://www.linkedin.com/in/isha-goyal-34b419b7",
   github: "https://github.com/Ishagoyal",
-  resume: "/Isha Resume.pdf",
+  resume: "/Isha-Goyal-Resume.pdf",
 };
 type ModalLockState = {
   htmlOverflow: string;
@@ -974,6 +974,16 @@ const Portfolio = () => {
                 <span>Product Requirements</span>
                 <span>Success Metrics</span>
                 <span>0→1 Products</span>
+                <span>Product Requirements (PRDs)</span>
+                <span>Roadmapping</span>
+                <span>Prioritisation</span>
+                <span>Acceptance Criteria</span>
+                <span>Experimentation & A/B Testing</span>
+                <span>Competitive Analysis</span>
+                <span>Stakeholder Management</span>
+                <span>Agile / Scrum</span>
+                <span>Jira</span>
+                <span>Figma</span>
               </div>
             </div>
             <div>
@@ -986,6 +996,12 @@ const Portfolio = () => {
                 <span>React / TypeScript</span>
                 <span>Node.js</span>
                 <span>AWS</span>
+                <span>Prompt Engineering</span>
+                <span>RAG</span>
+                <span>Context & Memory Design</span>
+                <span>Model Evaluation</span>
+                <span>Inference Cost Modelling</span>
+                <span>MongoDB</span>
               </div>
             </div>
           </div>
