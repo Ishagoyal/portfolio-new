@@ -666,14 +666,14 @@ const Portfolio = () => {
             className="download-button"
             href={links.resume}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             <Download size={16} /> Download PDF
           </a>
         </div>
       </header>
       <main>
-        <section className="hero" id="top">
+        <section className="hero" id="top" aria-label="Introduction">
           <div className="hero-kicker">
             Technical Product Manager · 0→1 AI Products · Engineering Foundation
           </div>
@@ -689,16 +689,16 @@ const Portfolio = () => {
             </p>
             <div className="hero-links">
               <a href={links.email}>Email ↗</a>
-              <a href={links.linkedin} target="_blank" rel="noreferrer">
+              <a href={links.linkedin} target="_blank" rel="noopener noreferrer">
                 LinkedIn ↗
               </a>
-              <a href={links.github} target="_blank" rel="noreferrer">
+              <a href={links.github} target="_blank" rel="noopener noreferrer">
                 GitHub ↗
               </a>
             </div>
           </div>
         </section>
-        <section className="profile section-wrap">
+        <section className="profile section-wrap" aria-label="Profile">
           <SectionTitle number="01">Profile</SectionTitle>
           <div className="profile-copy">
             <p>
@@ -709,7 +709,11 @@ const Portfolio = () => {
             </p>
           </div>
         </section>
-        <section className="journey-section section-wrap" id="case-studies">
+        <section
+          className="journey-section section-wrap"
+          id="case-studies"
+          aria-label="Selected work"
+        >
           <SectionTitle number="02">Selected work</SectionTitle>
           <div className="project-showcase">
             <article
@@ -744,7 +748,7 @@ const Portfolio = () => {
                     className="prototype-link prototype-link--teaser"
                     href="https://cookbridge-whats-for-tea.lovable.app"
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                   >
                     Try prototype <ArrowUpRight size={16} />
                   </a>
@@ -769,6 +773,7 @@ const Portfolio = () => {
                 <img
                   src="/images/ai-fashion-stylist-project.jpg"
                   alt="Personal wardrobe with three digital outfit suggestions"
+                  loading="lazy"
                 />
                 <span>02</span>
                 <span className="play-affordance">
@@ -814,7 +819,10 @@ const Portfolio = () => {
             {fashionOpen && <FashionPanel onWatchDemo={openDemo} />}
           </div>
         </section>
-        <section className="journey-section engineering section-wrap">
+        <section
+          className="journey-section engineering section-wrap"
+          aria-label="Engineering foundation"
+        >
           <SectionTitle number="03">Engineering foundation</SectionTitle>
           <div className="engineering-intro">
             What six years of building software changed about how I make product
@@ -911,7 +919,11 @@ const Portfolio = () => {
             teams.
           </p>
         </section>
-        <section className="skills section-wrap" id="skills">
+        <section
+          className="skills section-wrap"
+          id="skills"
+          aria-label="Skills"
+        >
           <SectionTitle number="04">Skills</SectionTitle>
           <div className="skill-grid">
             <div>
