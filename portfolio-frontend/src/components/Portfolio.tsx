@@ -824,13 +824,17 @@ const Portfolio = () => {
             <article className="engineering-step">
               <div className="engineering-content">
                 <h3>I think beyond the interface</h3>
+                <p className="engineering-theme__domains">
+                  Alpha Nodus <b>·</b> Senior Software Developer <b>·</b> 2025
+                </p>
                 <p className="engineering-theme__evidence">
                   Frontend <b>→</b> APIs <b>→</b> integrations <b>→</b>{" "}
                   infrastructure <b>→</b> production
                 </p>
                 <p className="engineering-theme__copy">
-                  I’ve worked beyond UI implementation into APIs, integrations,
-                  deployment, and production ownership.
+                  Owned Greeter/Kiosk, a healthcare check-in product, across
+                  frontend, APIs, integrations, infrastructure and AWS
+                  deployment.
                 </p>
                 <p className="engineering-theme__implication">
                   <span>In product</span>I can see where a seemingly simple
@@ -845,6 +849,10 @@ const Portfolio = () => {
             <article className="engineering-step engineering-step--right">
               <div className="engineering-content">
                 <h3>I look for leverage, not just the next feature</h3>
+                <p className="engineering-theme__domains">
+                  Playment / TELUS International <b>·</b> Senior Frontend
+                  Developer <b>·</b> 2019–2023
+                </p>
                 <div className="engineering-theme__metric">
                   <strong>
                     5 <b>→</b> 1
@@ -854,9 +862,9 @@ const Portfolio = () => {
                   </span>
                 </div>
                 <p className="engineering-theme__copy">
-                  Over time I moved from shipping individual features to
-                  thinking about reusable systems, shared components,
-                  architecture, and reducing duplicated engineering effort.
+                  Owned GT Studio annotation workflows. Consolidated 5 frontend
+                  repositories into one monorepo and built Pixel, a shared
+                  React component library.
                 </p>
                 <p className="engineering-theme__implication">
                   <span>In product</span>I naturally ask whether something
@@ -874,13 +882,17 @@ const Portfolio = () => {
                   Complex systems <b>→</b> clear user experience
                 </p>
                 <p className="engineering-theme__domains">
-                  data-heavy workflows <b>·</b> healthcare <b>·</b> Web3{" "}
-                  <b>·</b> analytics
+                  JediSwap (Starknet) <b>·</b> Frontend Engineer <b>·</b>{" "}
+                  2023–2024
+                </p>
+                <p className="engineering-theme__domains">
+                  ClearGlass Analytics / Unifize Solutions <b>·</b> 2018–2019
                 </p>
                 <p className="engineering-theme__copy">
-                  I’ve worked on complex workflows across annotation tools,
-                  healthcare products, wallets, NFTs, blockchain transactions,
-                  and data-heavy interfaces.
+                  Shipped JediSwap Missions, abstracting wallets, NFTs and
+                  on-chain transactions into flows non-crypto users could
+                  complete. Earlier, built investment analytics dashboards and
+                  data-heavy product interfaces at ClearGlass Analytics.
                 </p>
                 <p className="engineering-theme__implication">
                   <span>In product</span>I’m comfortable going deep with
@@ -893,10 +905,22 @@ const Portfolio = () => {
               </span>
             </article>
           </div>
+          <Tags
+            items={[
+              "Unifize / ClearGlass · 2018–19",
+              "Playment / TELUS · 2019–23",
+              "JediSwap · 2023–24",
+              "Alpha Nodus · 2025",
+            ]}
+          />
           <p className="engineering-closing">
             That engineering depth is now the foundation I use to define clearer
             scope, make better trade-offs, and work credibly with engineering
             teams.
+          </p>
+          <p className="engineering-closing">
+            B.Tech, Computer Science &amp; Engineering · Rajasthan Technical
+            University, Jaipur
           </p>
         </section>
         <section className="skills section-wrap" id="skills">
