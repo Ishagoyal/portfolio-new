@@ -905,22 +905,10 @@ const Portfolio = () => {
               </span>
             </article>
           </div>
-          <Tags
-            items={[
-              "Unifize / ClearGlass · 2018–19",
-              "Playment / TELUS · 2019–23",
-              "JediSwap · 2023–24",
-              "Alpha Nodus · 2025",
-            ]}
-          />
           <p className="engineering-closing">
             That engineering depth is now the foundation I use to define clearer
             scope, make better trade-offs, and work credibly with engineering
             teams.
-          </p>
-          <p className="engineering-closing">
-            B.Tech, Computer Science &amp; Engineering · Rajasthan Technical
-            University, Jaipur
           </p>
         </section>
         <section className="skills section-wrap" id="skills">
@@ -962,7 +950,8 @@ const Portfolio = () => {
         </div>
         <div className="footer-meta">
           <span>
-            <MapPin size={15} /> Bengaluru, India
+            <MapPin size={15} /> Bengaluru, India · B.Tech, Computer Science
+            &amp; Engineering · Rajasthan Technical University
           </span>
           <span>© {new Date().getFullYear()} Isha Goyal</span>
         </div>
