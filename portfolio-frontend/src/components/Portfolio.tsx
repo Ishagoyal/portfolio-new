@@ -668,7 +668,7 @@ const Portfolio = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Download size={16} /> Resume ↗
+            <Download size={16} /> Resume
           </a>
         </div>
       </header>
@@ -699,22 +699,12 @@ const Portfolio = () => {
               </p>
             </div>
             <div className="hero-links">
-              <a
-                href="https://cookbridge-whats-for-tea.lovable.app"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Try the live prototype ↗
-              </a>
               <a href={links.email}>Email ↗</a>
               <a href={links.linkedin} target="_blank" rel="noopener noreferrer">
                 LinkedIn ↗
               </a>
               <a href={links.github} target="_blank" rel="noopener noreferrer">
                 GitHub ↗
-              </a>
-              <a href={links.resume} target="_blank" rel="noopener noreferrer">
-                Resume ↗
               </a>
             </div>
           </div>
