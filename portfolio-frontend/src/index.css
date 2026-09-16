@@ -395,6 +395,7 @@ footer > div:first-child svg { width: .6em; height: .6em; transition: transform 
   .prototype-link { justify-self: start; margin-top: 19px; }
   .prototype-note { margin-top: 10px; }
   .project-actions { align-items: flex-start; flex-direction: column; }
+  .project-actions .prototype-link { align-self: flex-start; }
   .evidence-row, .metric-grid { grid-template-columns: 1fr; }
   .evidence-row > div { min-height: auto; }
   .assumption-flow, .learning-lines article { grid-template-columns: 1fr; gap: 8px; }
