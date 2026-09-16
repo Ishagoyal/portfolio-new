@@ -761,6 +761,20 @@ const Portfolio = () => {
                   7/10 households validated the problem · Built & testing the
                   prototype
                 </p>
+                <ul>
+                  <li>
+                    Interviewed 10 households; 7 had recurring meal-decision
+                    friction
+                  </li>
+                  <li>
+                    Killed the inventory assumption mid-build and replaced it
+                    with belief-based inventory
+                  </li>
+                  <li>
+                    Made decision time and fridge-checking the primary
+                    outcomes, not engagement
+                  </li>
+                </ul>
                 <Tags
                   items={["0→1 Product", "User Research", "AI", "Prototype"]}
                 />
@@ -813,6 +827,20 @@ const Portfolio = () => {
                 <p className="project-proof">
                   Wardrobe photos → structured context → outfit recommendations
                 </p>
+                <ul>
+                  <li>
+                    5 wardrobe photos → 18 structured items → 3 grounded
+                    outfits, end to end
+                  </li>
+                  <li>
+                    Separated perception (what exists) from reasoning (what to
+                    wear)
+                  </li>
+                  <li>
+                    Stopped expanding scope once inference cost entered the
+                    validation economics
+                  </li>
+                </ul>
                 <Tags
                   items={[
                     "AI Vision",
