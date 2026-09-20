@@ -675,7 +675,7 @@ const Portfolio = () => {
       <main>
         <section className="hero" id="top" aria-label="Introduction">
           <div className="hero-kicker">
-            Technical Product Manager · 0→1 AI Products · Engineering Foundation
+            Product Builder · 0→1 AI Products · Engineering Foundation
           </div>
           <h1>
             Isha
@@ -694,7 +694,7 @@ const Portfolio = () => {
                 system design, and prototypes I build myself.
               </p>
               <p className="project-proof">
-                Bengaluru, India · Open to Product Engineer, Technical PM and
+                Bengaluru, India · Open to Product Engineer, Product Builder and
                 founding-team roles
               </p>
             </div>
